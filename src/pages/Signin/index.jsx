@@ -3,7 +3,33 @@ import "./index.css";
 import logo from "../../assets/img/logo.png";
 import google from "../../assets/img/google.png";
 import facebook from "../../assets/img/facebook.png";
+import React, { useState } from "react";
+import axios from "axios";
+import { Form, Navigate } from "react-router-dom";
 function Signin() {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      const result = await axios.post("auth/login", form);
+      localStorage.setItem("idUser", result.data.data.token);
+      localStorage.setItem("token", result.data.data.token);
+      alert(result.data.msg);
+      Navigate("/");
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
+  const handleChangeForm = (e) => {
+    setForm({ ...Form, [e.target.name]: e.target.value });
+  };
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <>
       <div className="container-fluid py-0 text center">
@@ -20,32 +46,43 @@ function Signin() {
               <input
                 type="text"
                 className="form-control"
+                placeholder="Username"
+                aria-label="Username"
+              />
+            </div>
+            <div className="form-group px-5 mb-3">
+              <input
+                type="email"
+                onChange={handleChangeForm}
+                className="form-control"
                 placeholder="Email"
                 aria-label="Email"
               />
+              {""}
             </div>
             <div className="form-group px-5 mb-3">
               <input
-                type="text"
+                type={showPassword ? "text" : "password"}
+                onChange={handleChangeForm}
                 className="form-control"
                 placeholder="Password"
                 aria-label="Password"
               />
-            </div>
-            <div className="form-group px-5 mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Password"
-                aria-label="Password"
-              />
+              {""}
             </div>
             <h6 className="forgot">
               <a href="./login.html">Forgot Password?</a>
             </h6>
             <div className="buttonsign d-grid gap-5 col-7 mt-4">
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                onClick={handleLogin}
+                type="button"
+              >
                 Sign In
+              </button>
+              <button onClick={handleShowPassword}>
+                {showPassword ? "Hide" : "Show"} Password
               </button>
             </div>
             <h6 className="or mt-2">Or sign in with</h6>
