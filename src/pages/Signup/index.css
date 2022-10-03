@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.body {
+  background-color: #ffffff;
+}
+.sign {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.hi {
+  font-family: "Poppins";
+  font-size: 15px;
+}
+.acc {
+  font-family: "Poppins";
+  font-size: 15px;
+}
+.forgot {
+  margin-left: 230px;
+}
+.buttonsign {
+  margin-left: 80px;
+}
+.goog {
+  margin-left: 100px;
+}
+.face {
+  margin-right: 75px;
+}
+.form-check {
+  margin-left: 50px;
+}
+.or {
+  margin-left: 150px;
+}
