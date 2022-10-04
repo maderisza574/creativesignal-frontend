@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage/";
 import Signin from "./pages/Signin/";
 import Signup from "./pages/Signup";
+import Detail from "./pages/Detail";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
         {/* {main} */}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/detail/:eventid" element={<Detail />} />
 
         {/* {PAGE NOT FOUND} */}
         <Route path="/*"></Route>

@@ -20,7 +20,8 @@
   margin-left: 230px;
 }
 .buttonsign {
-  margin-left: 80px;
+  /* margin-left: 80px; */
+  width: 65%;
 }
 .goog {
   margin-left: 100px;

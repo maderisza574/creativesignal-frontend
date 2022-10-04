@@ -6,11 +6,54 @@ import moment from "moment";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Banner from "../../assets/img/banner.png";
-import event from "../../assets/img/martin.png";
-import avatar from "../../assets/img/avatarevent.png";
+import { useNavigate } from "react-router-dom";
+import CardEvent from "../../components/Cardevent";
+import axios from "../../utils/axios";
 // import Findicon from "../../assets/img/findicon.png";
 
 function Landing() {
+  const navigate = useNavigate();
+  // const data = [
+  //   { id: 1, name: "Tea", category: "Drink" },
+  //   { id: 2, name: "Milk", category: "Drink" },
+  //   { id: 3, name: "Coffee", category: "Drink" },
+  // ];
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({});
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    getDataProduct();
+  }, []);
+
+  useEffect(() => {
+    getDataProduct();
+  }, [page]);
+  const getDataProduct = async () => {
+    try {
+      const result = await axios.get(
+        `api/event?page=${page}&limit=4&name=&sort=&datetimeShow`
+      );
+      setData(result.data.data);
+      setPagination(result.data.pagination);
+
+      // console.log(result);
+    } catch (error) {
+      // console.error(error);
+    }
+  };
+
+  const handleDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
+  const handlePrevPage = () => {
+    setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
+  // end pagination
   const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
   const [listDateShow, setListDateShow] = useState([]);
 
@@ -96,51 +139,34 @@ function Landing() {
         <div className="card px-0">
           <h5 className="text-center mt-3">events for you</h5>
           <div className="d-flex gap-2 mb-5 justify-content-center">
-            <div className="card crdevent border-0 width:260px; cursor: pointer">
-              <img src={event} alt="image event" className="card-img h-100" />
-              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
-                <h6 className="card-title text-white">Card Tiitle</h6>
-                <p className="card-text text-white">Progressive House Music</p>
-                <img src={avatar} alt="" className="crdava" />
+            {data.length > 0 ? (
+              data.map((item) => (
+                <div key={item.id}>
+                  <CardEvent
+                    data={item}
+                    newData="Data Baru nih"
+                    handleDetail={handleDetail}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="text-center">
+                <h3>Data Not Found !</h3>
               </div>
-            </div>
-            <div className="card crdevent border-0 width:260px; cursor: pointer">
-              <img src={event} alt="image event" className="card-img h-100" />
-              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
-                <h6 className="card-title text-white">Card Tiitle</h6>
-                <p className="card-text text-white">Progressive House Music</p>
-                <img src={avatar} alt="" className="crdava" />
-              </div>
-            </div>
-            <div className="card crdevent border-0 width:260px; cursor: pointer">
-              <img src={event} alt="image event" className="card-img h-100" />
-              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
-                <h6 className="card-title text-white">Card Tiitle</h6>
-                <p className="card-text text-white">Progressive House Music</p>
-                <img src={avatar} alt="" className="crdava" />
-              </div>
-            </div>
-            <div className="card crdevent border-0 width:260px; cursor: pointer">
-              <img src={event} alt="image event" className="card-img h-100" />
-              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
-                <h6 className="card-title text-white">Card Tiitle</h6>
-                <p className="card-text text-white">Progressive House Music</p>
-                <img src={avatar} alt="" className="crdava" />
-              </div>
-            </div>
-            <div className="card crdevent border-0 width:260px; cursor: pointer">
-              <img src={event} alt="image event" className="card-img h-100" />
-              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
-                <h6 className="card-title text-white">Card Tiitle</h6>
-                <p className="card-text text-white">Progressive House Music</p>
-                <img src={avatar} alt="" className="crdava" />
-              </div>
-            </div>
+            )}
             {/* end card */}
           </div>
           <div className="d-flex gap-2 justify-content-center w-100 my-5">
-            <button className="btn btn-primary">&lt;</button>
-            <button className="btn btn-primary">&gt;</button>
+            <button className="btn btn-primary" onClick={handlePrevPage}>
+              &lt;
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={handleNextPage}
+              disabled={page === pagination.totalPage ? true : false}
+            >
+              &gt;
+            </button>
           </div>
         </div>
       </main>

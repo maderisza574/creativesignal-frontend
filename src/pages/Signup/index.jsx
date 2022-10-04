@@ -2,10 +2,12 @@ import mascot from "../../assets/img/mascotimage.png";
 import "./index.css";
 import logo from "../../assets/img/logo.png";
 import React, { useState } from "react";
-import axios from "axios";
-import { Form, Navigate } from "react-router-dom";
+import axios from "../../utils/axios";
 import Signin from "../../pages/Signin/index";
+import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
 function Signup() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -13,19 +15,17 @@ function Signup() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
-      const result = await axios.post("api/auth/login", form);
-      localStorage.setItem("idUser", result.data.data.token);
-      localStorage.setItem("token", result.data.data.token);
-      alert(result.data.msg);
-      Navigate("/");
+      const result = await axios.post("api/auth/register", form);
+      alert(result.data.message);
+      navigate("/");
     } catch (error) {
-      alert(error.response.data.msg);
+      alert(error.response.data.message);
     }
   };
   const handleChangeForm = (e) => {
-    setForm({ ...Form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -48,14 +48,17 @@ function Signup() {
             <div className="form-group px-5 mb-3">
               <input
                 type="text"
+                name="username"
+                onChange={handleChangeForm}
                 className="form-control"
-                placeholder="Full name"
+                placeholder="Username"
                 aria-label="Full name"
               />
             </div>
             <div className="form-group px-5 mb-3">
               <input
                 type="email"
+                name="email"
                 onChange={handleChangeForm}
                 className="form-control"
                 placeholder="Email"
@@ -101,16 +104,7 @@ function Signup() {
               </button>
             </div>
             <br />
-            <div className="form-group px-5 mb-3">
-              <input
-                type={showPassword ? "text" : "password"}
-                onChange={handleChangeForm}
-                className="form-control"
-                placeholder="Confirm Password"
-                aria-label="Confirm Password"
-              />
-              {""}
-            </div>
+
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -125,18 +119,16 @@ function Signup() {
             <div className="buttonsign d-grid gap-5 col-7 mt-4">
               <button
                 className="btn btn-primary"
-                onClick={handleLogin}
+                onClick={handleRegister}
                 type="button"
               >
                 Sign Up
-              </button>
-              <button onClick={handleShowPassword}>
-                {showPassword ? "Hide" : "Show"} Password
               </button>
             </div>
             {/* end form */}
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
