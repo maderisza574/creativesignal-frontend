@@ -1,16 +1,10 @@
 import mascot from "../../assets/img/mascotimage.png";
 import "./index.css";
 import logo from "../../assets/img/logo.png";
-// import google from "../../assets/img/google.png";
-// import facebook from "../../assets/img/facebook.png";
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Navigate } from "react-router-dom";
-import Footer from "../../components/Footer";
-// import login from "../../pages/Signin/index";
 import Signin from "../../pages/Signin/index";
-// import eyeicon from "react-icons/ai/AiFillEye";
-// import slashicon from "react-icons/ai/AiFillEye";
 function Signup() {
   const [form, setForm] = useState({
     email: "",
@@ -145,97 +139,6 @@ function Signup() {
           </div>
         </div>
       </div>
-      {/* START FOOTER */}
-      <Footer />
-      {/* END FOOTER */}
-      {/* <footer className="footer container-fluid text-center text-md-start mt-5">
-        <div className="row mt-3">
-          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <img src={logo} className="img-fluid" alt="logo"></img>
-            <p>Find events you love with our</p>
-          </div>
-          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Wetick</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                About Us
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Features
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Blog
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Payments
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Mobile App
-              </a>
-            </p>
-          </div>
-          <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Features</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                Booking
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Create Event
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Discover
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Register
-              </a>
-            </p>
-          </div>
-          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Company</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                Partnership
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Help
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Terms of Service
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Privacy Policy
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Sitemap
-              </a>
-            </p>
-          </div>
-          <div className="text-left p-4">© 2022 Copyright:</div>
-        </div>
-      </footer> */}
     </>
   );
 }

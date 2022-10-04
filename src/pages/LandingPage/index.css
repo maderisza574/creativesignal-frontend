@@ -1,11 +1,41 @@
-main {
+/* main {
   max-width: 100%;
   width: 1200px;
   margin: 30px auto;
   padding: 0px 50px;
+} */
+.banner__image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  color: white;
+  font-size: 3rem; /* 16px x 3 */
+  font-family: "Bungee", cursive;
+  letter-spacing: 5px;
+  position: relative;
+  z-index: 1;
+}
+.banner__overlay--title {
+  position: absolute;
+  bottom: 300px;
+  left: 30px;
+  color: white;
+  font-size: 3rem; /* 16px x 3 */
+  font-family: "Bungee", cursive;
+  letter-spacing: 5px;
+  z-index: 2;
+  top: 90px;
+  /* flex-direction: row;
+  justify-content: space-around; */
+}
+.text-pink {
+  color: #ff3d71;
 }
 
-.article__event {
+.bg-pink {
+  background-color: #f1c9d4;
+}
+/* .article__event {
   display: flex;
 }
 
@@ -37,4 +67,4 @@ main {
   color: #4b4b4b;
   text-indent: 30px;
   line-height: 30px;
-}
+} */

@@ -4,12 +4,11 @@ import logo from "../../assets/img/logo.png";
 import google from "../../assets/img/google.png";
 import facebook from "../../assets/img/facebook.png";
 import React, { useState } from "react";
-import axios from "axios";
-import { Form, Navigate } from "react-router-dom";
-import Footer from "../../components/Footer";
-// import eyeicon from "react-icons/ai/AiFillEye";
-// import slashicon from "react-icons/ai/AiFillEye";
+import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
+// import { ArrowRight } from "react-bootstrap-icons";
 function Signin() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -18,17 +17,17 @@ function Signin() {
 
   const handleLogin = async () => {
     try {
-      const result = await axios.post("auth/login", form);
-      localStorage.setItem("idUser", result.data.data.token);
+      const result = await axios.post("api/auth/login", form);
+      localStorage.setItem("idUser", result.data.data.userid);
       localStorage.setItem("token", result.data.data.token);
-      alert(result.data.msg);
-      Navigate("/");
+      alert(result.data.message);
+      navigate("/");
     } catch (error) {
-      alert(error.response.data.msg);
+      alert(error.response.data.message);
     }
   };
   const handleChangeForm = (e) => {
-    setForm({ ...Form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -45,33 +44,54 @@ function Signin() {
             <p className="sign px-5 mt-3"> Sign in</p>
             <p className="hi px-5 mt-3">Hi, Welcome back to Urticket</p>
             {/* form */}
-            <div className="form-group px-5 mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Username"
-                aria-label="Username"
-              />
-            </div>
-            <div className="form-group px-5 mb-3">
+            <div className="container text-center mt-5">
               <input
                 type="email"
+                name="email"
                 onChange={handleChangeForm}
                 className="form-control"
                 placeholder="Email"
                 aria-label="Email"
               />
               {""}
+              <br />
             </div>
-            <div className="form-group px-5 mb-3">
+            <div className="input-group">
               <input
                 type={showPassword ? "text" : "password"}
-                onChange={handleChangeForm}
+                name="password"
+                id=""
                 className="form-control"
-                placeholder="Password"
-                aria-label="Password"
+                placeholder="Your Password"
+                onChange={handleChangeForm}
               />
-              {""}
+              <button className="btn btn-sm" onClick={handleShowPassword}>
+                {showPassword ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-eye-slash-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-eye-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                  </svg>
+                )}
+              </button>
             </div>
             <h6 className="forgot">
               <a href="./login.html">Forgot Password?</a>
@@ -83,9 +103,6 @@ function Signin() {
                 type="button"
               >
                 Sign In
-              </button>
-              <button onClick={handleShowPassword}>
-                {showPassword ? "Hide" : "Show"} Password
               </button>
             </div>
             <h6 className="or mt-2">Or sign in with</h6>
@@ -123,97 +140,6 @@ function Signin() {
           </div>
         </div>
       </div>
-      {/* START FOOTER */}
-      <Footer />
-      {/* END FOOTER */}
-      {/* <footer className="footer container-fluid text-center text-md-start mt-5">
-        <div className="row mt-3">
-          <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <img src={logo} className="img-fluid" alt="logo"></img>
-            <p>Find events you love with our</p>
-          </div>
-          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Wetick</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                About Us
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Features
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Blog
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Payments
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Mobile App
-              </a>
-            </p>
-          </div>
-          <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Features</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                Booking
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Create Event
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Discover
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Register
-              </a>
-            </p>
-          </div>
-          <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <h6 className="text-uppercase fw-bold mb-4">Company</h6>
-            <p>
-              <a href="#!" className="text-reset">
-                Partnership
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Help
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Terms of Service
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Privacy Policy
-              </a>
-            </p>
-            <p>
-              <a href="#!" className="text-reset">
-                Sitemap
-              </a>
-            </p>
-          </div>
-          <div className="text-left p-4">© 2022 Copyright:</div>
-        </div>
-      </footer> */}
     </>
   );
 }

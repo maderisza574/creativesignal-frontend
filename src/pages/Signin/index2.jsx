@@ -1,54 +1,73 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     try {
-      const result = await axios.post("auth/login", form);
-      localStorage.setItem("idUser", result.data.data.token);
+      const result = await axios.post("api/auth/login", form);
+      localStorage.setItem("userid", result.data.data.userId);
       localStorage.setItem("token", result.data.data.token);
-      alert(result.data.msg);
-      Navigate("/");
-      //   console.log(result);
+      alert(JSON.stringify(result.data.message));
+      navigate("/");
     } catch (error) {
-      alert(error.response.data.msg);
-      //   console.error(error.response);
+      alert(error.response.data.message);
     }
   };
 
-  const handleChangeForm = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
+
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
-    <div className="container text-center">
-      <h1>Login Page</h1>
-      <hr />
-      <input type="email" onChange={handleChangeForm} />
-      {""}
-      <br />
-      <input
-        type={showPassword ? "text" : "password"}
-        onChange={handleChangeForm}
-      />
-      {""}
-      <br />
-      <button onClick={handleShowPassword}>
-        {showPassword ? "Hide" : "Show"} Password
-      </button>
-      <br />
-      <button className="btn-btn-primary" onClick={handleLogin}>
-        SignIn
-      </button>
+    <div>
+      <div className="container text-center mt-5">
+        <input
+          type="email"
+          name="email"
+          id=""
+          className="form-control"
+          placeholder="Your Email"
+          onChange={handleInputChange}
+        />
+        <br />
+        <div className="input-group">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            id=""
+            className="form-control"
+            placeholder="Your Password"
+            onChange={handleInputChange}
+          />
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={handleShowPassword}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
+        <br />
+        <div className="form-control btn btn-primary" onClick={handleLogin}>
+          Sign In
+        </div>
+      </div>
     </div>
   );
 }
