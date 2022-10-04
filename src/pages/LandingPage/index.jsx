@@ -1,13 +1,36 @@
 import "./index.css";
 
 // import stanlee from "../../assets/img/stanlee.png";
-
+import { useEffect, useState } from "react";
+import moment from "moment";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Banner from "../../assets/img/banner.png";
+import event from "../../assets/img/martin.png";
+import avatar from "../../assets/img/avatarevent.png";
 // import Findicon from "../../assets/img/findicon.png";
 
 function Landing() {
+  const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
+  const [listDateShow, setListDateShow] = useState([]);
+
+  useEffect(() => {
+    generateDate();
+  }, [dateShow]);
+  const generateDate = () => {
+    let listDate = [
+      moment(dateShow).subtract(2, "days"),
+      moment(dateShow).subtract(1, "days"),
+      dateShow,
+      moment(dateShow).subtract(-1, "days"),
+      moment(dateShow).subtract(-2, "days"),
+    ];
+    setListDateShow(listDate);
+  };
+  const selectDate = (date) => {
+    setDateShow(date);
+  };
+
   return (
     <>
       {/* START HEADER */}
@@ -47,34 +70,21 @@ function Landing() {
             </div>
           </div>
           {/* end banner */}
-          <div className="buton container">
-            <div className="butdate container col text-center">
-              <div className="btn-group me-2">
-                <button type="button" className="btn btn-outline-warning">
-                  <p>13</p>Mon
-                </button>
-                <div className="btn-group me-2">
-                  <button type="button" className="btn btn-outline-warning">
-                    <p>13</p>Mon
-                  </button>
-                </div>
-                <div className="btn-group me-2">
-                  <button type="button" className="btn btn-outline-warning">
-                    <p>13</p>Mon
-                  </button>
-                </div>
-                <div className="btn-group me-2">
-                  <button type="button" className="btn btn-outline-warning">
-                    <p>13</p>Mon
-                  </button>
-                </div>
-                <div className="btn-group me-2">
-                  <button type="button" className="btn btn-outline-warning">
-                    <p>13</p>Mon
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="App justify-content-center">
+            <hr />
+            {listDateShow.map((item, index) => (
+              <button
+                key={index}
+                style={{ margin: "0 10px" }}
+                className={index === 2 ? "active" : ""}
+                onClick={() => {
+                  selectDate(moment(item).format("YYYY-MM-DD"));
+                }}
+              >
+                <div>{moment(item).format("DD")}</div>
+                <small>{moment(item).format("ddd")}</small>
+              </button>
+            ))}
           </div>
         </div>
         {/* button */}
@@ -83,20 +93,56 @@ function Landing() {
             &#8212; EVENT
           </snap>
         </div>
-        {/* <article className="article__event">
-          <div className="article__image">
-            <img src={stanlee} alt="stanlee" className="article__image--size" />
+        <div className="card px-0">
+          <h5 className="text-center mt-3">events for you</h5>
+          <div className="d-flex gap-2 mb-5 justify-content-center">
+            <div className="card crdevent border-0 width:260px; cursor: pointer">
+              <img src={event} alt="image event" className="card-img h-100" />
+              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
+                <h6 className="card-title text-white">Card Tiitle</h6>
+                <p className="card-text text-white">Progressive House Music</p>
+                <img src={avatar} alt="" className="crdava" />
+              </div>
+            </div>
+            <div className="card crdevent border-0 width:260px; cursor: pointer">
+              <img src={event} alt="image event" className="card-img h-100" />
+              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
+                <h6 className="card-title text-white">Card Tiitle</h6>
+                <p className="card-text text-white">Progressive House Music</p>
+                <img src={avatar} alt="" className="crdava" />
+              </div>
+            </div>
+            <div className="card crdevent border-0 width:260px; cursor: pointer">
+              <img src={event} alt="image event" className="card-img h-100" />
+              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
+                <h6 className="card-title text-white">Card Tiitle</h6>
+                <p className="card-text text-white">Progressive House Music</p>
+                <img src={avatar} alt="" className="crdava" />
+              </div>
+            </div>
+            <div className="card crdevent border-0 width:260px; cursor: pointer">
+              <img src={event} alt="image event" className="card-img h-100" />
+              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
+                <h6 className="card-title text-white">Card Tiitle</h6>
+                <p className="card-text text-white">Progressive House Music</p>
+                <img src={avatar} alt="" className="crdava" />
+              </div>
+            </div>
+            <div className="card crdevent border-0 width:260px; cursor: pointer">
+              <img src={event} alt="image event" className="card-img h-100" />
+              <div className="card-img-overlay d-flex flex-column justify-content-end mb-4">
+                <h6 className="card-title text-white">Card Tiitle</h6>
+                <p className="card-text text-white">Progressive House Music</p>
+                <img src={avatar} alt="" className="crdava" />
+              </div>
+            </div>
+            {/* end card */}
           </div>
-          <div className="article__caption">
-            <h2 className="article__caption--header">Its me Stanlee</h2>
-            <p className="article__caption--desc">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni
-              similique laudantium qui esse debitis minus mollitia magnam, ullam
-              sed delectus veritatis. Nemo officia libero laboriosam saepe
-              impedit tenetur quod doloremque?
-            </p>
+          <div className="d-flex gap-2 justify-content-center w-100 my-5">
+            <button className="btn btn-primary">&lt;</button>
+            <button className="btn btn-primary">&gt;</button>
           </div>
-        </article> */}
+        </div>
       </main>
       {/* END MAIN */}
 
