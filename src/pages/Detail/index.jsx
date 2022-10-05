@@ -2,8 +2,19 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Martin from "../../assets/img/martin.png";
 import Avatar from "../../assets/img/avatarevent.png";
+import { useParams, useNavigate } from "react-router-dom";
 
 function Detail() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const handleOrder = () => {
+    navigate("/order", {
+      state: {
+        eventId: id,
+      },
+    });
+  };
   return (
     <div>
       {/* Header */}
@@ -92,7 +103,9 @@ function Detail() {
             <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script> */}
               {/* endmap */}
               <div className="d-grid gap-2 col-6 mt-4">
-                <button className="btn btn-primary">Buy Ticket</button>
+                <button onClick={handleOrder} className="btn btn-primary">
+                  Buy Ticket
+                </button>
               </div>
             </div>
           </div>

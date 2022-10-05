@@ -19,7 +19,7 @@ function Signup() {
     try {
       const result = await axios.post("api/auth/register", form);
       alert(result.data.message);
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       alert(error.response.data.message);
     }

@@ -5,8 +5,11 @@ import REG from "../../assets/img/REG.png";
 import VVIP from "../../assets/img/VVIP.png";
 import VIP from "../../assets/img/VIP.png";
 import Arr from "../../assets/img/arrupdo.png";
+import { useLocation } from "react-router-dom";
 
 function Order() {
+  const { state } = useLocation();
+  console.log(state);
   return (
     <div>
       {/* Header */}

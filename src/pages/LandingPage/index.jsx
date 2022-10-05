@@ -21,6 +21,8 @@ function Landing() {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({});
   const [page, setPage] = useState(1);
+  const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
+  const [listDateShow, setListDateShow] = useState([]);
 
   useEffect(() => {
     getDataProduct();
@@ -29,6 +31,9 @@ function Landing() {
   useEffect(() => {
     getDataProduct();
   }, [page]);
+  useEffect(() => {
+    generateDate();
+  }, [dateShow]);
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
@@ -54,12 +59,7 @@ function Landing() {
     setPage(page + 1);
   };
   // end pagination
-  const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
-  const [listDateShow, setListDateShow] = useState([]);
 
-  useEffect(() => {
-    generateDate();
-  }, [dateShow]);
   const generateDate = () => {
     let listDate = [
       moment(dateShow).subtract(2, "days"),
@@ -73,6 +73,7 @@ function Landing() {
   const selectDate = (date) => {
     setDateShow(date);
   };
+  console.log("DATE ACTIVE = " + dateShow);
 
   return (
     <>
@@ -113,8 +114,7 @@ function Landing() {
             </div>
           </div>
           {/* end banner */}
-          <div className="App justify-content-center">
-            <hr />
+          <div className="App">
             {listDateShow.map((item, index) => (
               <button
                 key={index}
@@ -132,9 +132,7 @@ function Landing() {
         </div>
         {/* button */}
         <div className="col-3 rounded-pill bg-pink p-1 text-center mx-auto">
-          <snap className="text-pink letter-spacing fw-bold">
-            &#8212; EVENT
-          </snap>
+          <div className="text-pink letter-spacing fw-bold">&#8212; EVENT</div>
         </div>
         <div className="card px-0">
           <h5 className="text-center mt-3">events for you</h5>
