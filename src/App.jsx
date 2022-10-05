@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage/";
 import Signin from "./pages/Signin/";
 import Signup from "./pages/Signup";
 import Detail from "./pages/Detail";
+import Order from "./pages/order";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         {/* {main} */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/detail/:eventid" element={<Detail />} />
+        <Route path="/order/" element={<Order />} />
 
         {/* {PAGE NOT FOUND} */}
         <Route path="/*"></Route>
