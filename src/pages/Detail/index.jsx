@@ -3,10 +3,31 @@ import Footer from "../../components/Footer";
 import Martin from "../../assets/img/martin.png";
 import Avatar from "../../assets/img/avatarevent.png";
 import { useParams, useNavigate } from "react-router-dom";
-
+import React from "react";
+import { useEffect, useState } from "react";
 function Detail() {
   const navigate = useNavigate();
+  const [dataEvent, setDataEvent] = useState([]);
   const { id } = useParams();
+  useEffect(() => {
+    setTimeout(() => {
+      const DATA = {
+        status: 200,
+        message: "Success Get Data By Id",
+        data: [
+          {
+            id: "4de9e4a1-3492-43f0-9b96-be3374f20545",
+            name: "Coffee",
+            price: 1000,
+            createdAt: "2022-09-02T09:04:27.196304+00:00",
+            updatedAt: "2022-09-02T09:04:27.196304+00:00",
+            image: "Event-Organizing/Event/wkv4k0dy9nzyzm7qbvmu",
+          },
+        ],
+      };
+      setDataEvent(DATA.data);
+    }, 3000);
+  }, []);
   console.log(id);
   const handleOrder = () => {
     navigate("/order", {
@@ -111,6 +132,8 @@ function Detail() {
           </div>
         </div>
       </div>
+      <p>NAME = {dataEvent[0]?.name}</p>
+      <p>EVENT ID = {id}</p>
       {/* Footer */}
 
       <Footer />

@@ -43,7 +43,7 @@ function Landing() {
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
-        `api/event?page=${page}&limit=4&name=${searchName}&sort=&datetimeShow=${dateShow}`
+        `api/event?page=${page}&limit=4&name=${searchName}&sort=&dateTimeShow=${dateShow}`
       );
       setData(result.data.data);
       setPagination(result.data.pagination);
