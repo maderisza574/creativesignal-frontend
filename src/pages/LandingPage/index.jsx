@@ -71,9 +71,10 @@ function Landing() {
     setListDateShow(listDate);
   };
   const selectDate = (date) => {
+    console.log(date);
     setDateShow(date);
   };
-  console.log("DATE ACTIVE = " + dateShow);
+  // console.log("DATE ACTIVE = " + dateShow);
 
   return (
     <>
@@ -113,23 +114,21 @@ function Landing() {
               </div>
             </div>
           </div>
-          {/* end banner */}
-          <div className="App">
-            {listDateShow.map((item, index) => (
-              <button
-                key={index}
-                style={{ margin: "0 10px" }}
-                className={index === 2 ? "active" : ""}
-                onClick={() => {
-                  selectDate(moment(item).format("YYYY-MM-DD"));
-                }}
-              >
-                <div>{moment(item).format("DD")}</div>
-                <small>{moment(item).format("ddd")}</small>
-              </button>
-            ))}
-          </div>
         </div>
+        {/* end banner */}
+
+        {listDateShow.map((item, index) => (
+          <button
+            key={index}
+            style={{ margin: "0 10px" }}
+            className={index === 2 ? "active" : ""}
+            onClick={() => selectDate(moment(item).format("YYYY-MM-DD"))}
+          >
+            <div>{moment(item).format("DD")}</div>
+            <small>{moment(item).format("ddd")}</small>
+          </button>
+        ))}
+
         {/* button */}
         <div className="col-3 rounded-pill bg-pink p-1 text-center mx-auto">
           <div className="text-pink letter-spacing fw-bold">&#8212; EVENT</div>
