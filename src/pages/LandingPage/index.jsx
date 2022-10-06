@@ -23,6 +23,8 @@ function Landing() {
   const [page, setPage] = useState(1);
   const [dateShow, setDateShow] = useState(moment().format("YYYY-MM-DD")); // 2022-10-04
   const [listDateShow, setListDateShow] = useState([]);
+  const [keyword, setKeyword] = useState("");
+  const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
     getDataProduct();
@@ -34,10 +36,14 @@ function Landing() {
   useEffect(() => {
     generateDate();
   }, [dateShow]);
+  useEffect(() => {
+    // console.log("search is update");
+    getDataProduct();
+  }, [page, searchName]);
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
-        `api/event?page=${page}&limit=4&name=&sort=&datetimeShow`
+        `api/event?page=${page}&limit=4&name=${searchName}&sort=&datetimeShow`
       );
       setData(result.data.data);
       setPagination(result.data.pagination);
@@ -71,10 +77,12 @@ function Landing() {
     setListDateShow(listDate);
   };
   const selectDate = (date) => {
-    console.log(date);
     setDateShow(date);
   };
   // console.log("DATE ACTIVE = " + dateShow);
+  const handleSearchNAme = () => {
+    setSearchName(keyword);
+  };
 
   return (
     <>
@@ -101,12 +109,14 @@ function Landing() {
                         type="text"
                         placeholder="Search event"
                         className="form-control border-0"
+                        onChange={(e) => setKeyword(e.target.value)}
                       />
                       <input
                         type="text"
                         placeholder="Where"
                         className="form-control border-top-0 border-bottom-0"
                       />
+                      <button onClick={handleSearchNAme}>Search</button>
                       <div className="btn btn-primary">&#10140;</div>
                     </div>
                   </div>
