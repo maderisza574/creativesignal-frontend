@@ -39,7 +39,7 @@ function Landing() {
   useEffect(() => {
     // console.log("search is update");
     getDataProduct();
-  }, [page, searchName]);
+  }, [page, searchName, dateShow]);
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
@@ -127,17 +127,19 @@ function Landing() {
         </div>
         {/* end banner */}
 
-        {listDateShow.map((item, index) => (
-          <button
-            key={index}
-            style={{ margin: "0 10px" }}
-            className={index === 2 ? "active" : ""}
-            onClick={() => selectDate(moment(item).format("YYYY-MM-DD"))}
-          >
-            <div>{moment(item).format("DD")}</div>
-            <small>{moment(item).format("ddd")}</small>
-          </button>
-        ))}
+        <div className="container d-flex justify-content-center mb-5">
+          {listDateShow.map((item, index) => (
+            <button
+              key={index}
+              style={{ margin: "0 10px" }}
+              className={index === 2 ? "active" : ""}
+              onClick={() => selectDate(moment(item).format("YYYY,MM,DD"))}
+            >
+              <div>{moment(item).format("DD")}</div>
+              <small>{moment(item).format("ddd")}</small>
+            </button>
+          ))}
+        </div>
 
         {/* button */}
         <div className="col-3 rounded-pill bg-pink p-1 text-center mx-auto">
