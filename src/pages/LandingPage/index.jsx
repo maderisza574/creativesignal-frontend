@@ -43,7 +43,7 @@ function Landing() {
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
-        `api/event?page=${page}&limit=4&name=${searchName}&sort=&datetimeShow`
+        `api/event?page=${page}&limit=4&name=${searchName}&sort=&datetimeShow=${dateShow}`
       );
       setData(result.data.data);
       setPagination(result.data.pagination);
@@ -79,7 +79,7 @@ function Landing() {
   const selectDate = (date) => {
     setDateShow(date);
   };
-  // console.log("DATE ACTIVE = " + dateShow);
+  console.log("DATE ACTIVE = " + dateShow);
   const handleSearchNAme = () => {
     setSearchName(keyword);
   };
