@@ -4,8 +4,8 @@ function ProfileLeft() {
     <div>
       <div className="card d-flex">
         <div className="row d-flex">
-          <div className="left col bg-success">
-            <div className="d-flex gap-3 bg-primary">
+          <div className="left card bg-light">
+            <div className="d-flex gap-3 bg-light mb-3">
               <img src={Johnicon} alt="" />
               John Thomson
               <br />
@@ -110,7 +110,6 @@ function ProfileLeft() {
               </svg>
               Setting
             </div>
-            as
           </div>
           {/* <div className="right col col-md-8 bg-danger"></div> */}
         </div>
