@@ -3,9 +3,7 @@ import axios from "../../utils/axios";
 export const getDataProduct = () => {
   return {
     type: "GET_DATA_PRODUCT",
-    payload: axios.get(
-      `product?searchName=&sort=&limit=30&page=1&searchDateCreated=`
-    ),
+    payload: axios.get(`api/event?page=&limit=&name=&sort=&dateTimeShow=`),
   };
 };
 

@@ -9,6 +9,9 @@ import PrivateRoute from "./utils/routes/PrivateRoute";
 import CounterFunc from "./pages/Counter/functional-component";
 import CounterClass from "./pages/Counter/class-component";
 import ManageEvent from "./pages/ManageEvent";
+import Payment from "./pages/payment";
+import Profile from "./pages/Profile";
+import ProfileLeft from "./components/ProfileLeft";
 function App() {
   return (
     <BrowserRouter>
@@ -23,12 +26,16 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/detail/:eventid" element={<Detail />} />
           <Route path="/order/" element={<Order />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profileleft" element={<ProfileLeft />} />
         </Route>
         {/* Private admin ROute */}
-        <Route element={<PrivateRoute isAdmin={true} />}>{}</Route>
-        <Route path="/manage-event" element={<ManageEvent />} />
+        <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="/manage-event" element={<ManageEvent />} />
+        </Route>
         {/* {PAGE NOT FOUND} */}
-        <Route path="/*"></Route>
+        {/* <Route path="/*"></Route> */}
         <Route path="/counter/func" element={<CounterFunc />} />
         <Route path="/counter/class" element={<CounterClass />} />
       </Routes>

@@ -9,8 +9,10 @@ const axiosApiIntances = axios.create({
 axiosApiIntances.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    const refreshToken = localStorage.getItem("refreshToken");
     config.headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      refreshtoken: refreshToken,
     };
     return config;
   },
@@ -38,7 +40,7 @@ axiosApiIntances.interceptors.response.use(
     if (error.response.status === 403) {
       if (error.response.data.message === "jwt expired") {
         axiosApiIntances
-          .post("auth/refresh")
+          .post("api/auth/refresh")
           .then((res) => {
             localStorage.setItem("token", res.data.data.token);
             localStorage.setItem("refreshToken", res.data.data.refreshToken);

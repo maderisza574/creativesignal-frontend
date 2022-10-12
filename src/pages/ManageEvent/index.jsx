@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-import CardEvent from "../../components/Cardevent";
+// import CardEvent from "../../components/Cardevent";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
   getDataProduct,
-  createDataProduct,
-  updateDataProduct,
+  // createDataProduct,
+  // updateDataProduct,
 } from "../../stores/actions/product";
 
-export default function ManageEvent() {
+export default function Manageevent() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
-
+  console.log(product);
   const [form, setForm] = useState({});
   const [image, setImage] = useState("");
   const [productId, setProductId] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
-
+  console.log(productId);
   useEffect(() => {
     dispatch(getDataProduct());
   }, []);
@@ -35,13 +35,13 @@ export default function ManageEvent() {
     // formData.append("price", "123")
     // formData.append("image", File)
 
-    dispatch(createDataProduct(formData)).then(() => {
-      dispatch(getDataProduct());
-      resetForm();
-      setTimeout(() => {
-        dispatch({ type: "RESET_MESSAGE" });
-      }, 3000);
-    });
+    // dispatch(createDataProduct(formData)).then(() => {
+    //   dispatch(getDataProduct());
+    //   resetForm();
+    //   setTimeout(() => {
+    //     dispatch({ type: "RESET_MESSAGE" });
+    //   }, 3000);
+    // });
   };
 
   const setUpdate = (data) => {
@@ -61,24 +61,24 @@ export default function ManageEvent() {
       formData.append(data, form[data]);
     }
 
-    dispatch(updateDataProduct(formData, productId)).then(() => {
-      dispatch(getDataProduct());
-      setIsUpdate(false);
-      resetForm();
-      setTimeout(() => {
-        dispatch({ type: "RESET_MESSAGE" });
-      }, 3000);
-    });
+    // dispatch(updateDataProduct(formData, productId)).then(() => {
+    //   dispatch(getDataProduct());
+    //   setIsUpdate(false);
+    //   resetForm();
+    //   setTimeout(() => {
+    //     dispatch({ type: "RESET_MESSAGE" });
+    //   }, 3000);
+    // });
   };
 
-  const resetForm = () => {
-    setForm({
-      name: "",
-      price: "",
-      image: "",
-    });
-    setImage("");
-  };
+  // const resetForm = () => {
+  //   setForm({
+  //     name: "",
+  //     price: "",
+  //     image: "",
+  //   });
+  //   setImage("");
+  // };
 
   const handleChangeForm = (e) => {
     const { name, value, files } = e.target;
@@ -96,8 +96,8 @@ export default function ManageEvent() {
       <Header />
       <div className="card container p-4">
         <h1 className="text-center">ManageEvent</h1>
-        <hr />
-        {product.message && (
+        {/* <hr /> */}
+        {/* {product.message && (
           <div
             className={
               "alert alert-dismissible fade show " + product.isError
@@ -108,7 +108,7 @@ export default function ManageEvent() {
           >
             {product.message}
           </div>
-        )}
+        )} */}
 
         <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
           <label className="me-3">Input Name</label>
@@ -137,18 +137,18 @@ export default function ManageEvent() {
           {image && <img src={image} alt="view image" />}
 
           <button type="submit" className="w-100 my-5 btn btn-primary">
-            {product.isLoading ? (
+            {/* {product.isLoading ? (
               <div className="spinner-border text-white" role="status">
                 <span className="sr-only"></span>
               </div>
             ) : (
               <div>{isUpdate ? "Update" : "Save"}</div>
-            )}
+            )} */}
           </button>
         </form>
       </div>
       <main className="container d-flex gap-3 my-5">
-        {product.data.length > 0 ? (
+        {/* {product.data.length > 0 ? (
           product.data.map((item) => (
             <div key={item.id}>
               <CardEvent data={item} setUpdate={setUpdate} />
@@ -156,8 +156,9 @@ export default function ManageEvent() {
           ))
         ) : (
           <h1>Data Not Found !</h1>
-        )}
+        )} */}
       </main>
+      <button onClick={setUpdate}></button>
       <Footer />
     </>
   );
