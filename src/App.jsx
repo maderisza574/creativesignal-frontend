@@ -12,6 +12,8 @@ import ManageEvent from "./pages/ManageEvent";
 import Payment from "./pages/payment";
 import Profile from "./pages/Profile";
 import ProfileLeft from "./components/ProfileLeft";
+import ProfileDetail from "./components/ProfileDetail";
+import EditProfile from "./components/EditProfile";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +31,8 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profileleft" element={<ProfileLeft />} />
+          <Route path="/profiledetail" element={<ProfileDetail />} />
+          <Route path="/profileedit" element={<EditProfile />} />
         </Route>
         {/* Private admin ROute */}
         <Route element={<PrivateRoute isAdmin={true} />}>
