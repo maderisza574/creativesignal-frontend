@@ -116,8 +116,13 @@ function Landing() {
                         placeholder="Where"
                         className="form-control border-top-0 border-bottom-0"
                       />
-                      <button onClick={handleSearchNAme}>Search</button>
-                      <div className="btn btn-primary">&#10140;</div>
+
+                      <button
+                        onClick={handleSearchNAme}
+                        className="btn btn-primary"
+                      >
+                        &#10140;
+                      </button>
                     </div>
                   </div>
                 </div>

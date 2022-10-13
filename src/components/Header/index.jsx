@@ -15,11 +15,14 @@ export default function Header() {
   const handleProfile = () => {
     navigate("/profile");
   };
+  const handleHome = () => {
+    navigate("/");
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-white">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" onClick={handleHome}>
             <img src={logo} alt="logo" />
           </a>
           <button

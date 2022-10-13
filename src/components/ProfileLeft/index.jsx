@@ -1,5 +1,14 @@
 import Johnicon from "../../assets/img/john.png";
+import { useNavigate } from "react-router-dom";
 function ProfileLeft() {
+  const navigate = useNavigate();
+
+  const ChangePass = () => {
+    navigate("/changepass");
+  };
+  const EditProfile = () => {
+    navigate("/profileedit");
+  };
   return (
     <div>
       <div className="card bg-light d-flex">
@@ -29,7 +38,7 @@ function ProfileLeft() {
               Profile
             </div>
 
-            <div className="fs-5 mb-3 p-2">
+            <div className="fs-5 mb-3 p-2" onClick={EditProfile}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -42,7 +51,7 @@ function ProfileLeft() {
               </svg>
               Edit Profile
             </div>
-            <div className="fs-5 mb-3 p-2">
+            <div className="fs-5 mb-3 p-2" onClick={ChangePass}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

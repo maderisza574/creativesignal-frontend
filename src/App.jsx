@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import ProfileLeft from "./components/ProfileLeft";
 import ProfileDetail from "./components/ProfileDetail";
 import EditProfile from "./components/EditProfile";
+import ChangePass from "./components/ChangePass";
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
           <Route path="/profileleft" element={<ProfileLeft />} />
           <Route path="/profiledetail" element={<ProfileDetail />} />
           <Route path="/profileedit" element={<EditProfile />} />
+          <Route path="/changepass" element={<ChangePass />} />
         </Route>
         {/* Private admin ROute */}
         <Route element={<PrivateRoute isAdmin={true} />}>
