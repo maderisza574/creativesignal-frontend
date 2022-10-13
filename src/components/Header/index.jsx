@@ -12,6 +12,9 @@ export default function Header() {
     navigate(`/${nav}`);
   };
 
+  const handleProfile = () => {
+    navigate("/profile");
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-white">
@@ -61,7 +64,7 @@ export default function Header() {
               {isLogin ? (
                 <>
                   <div style={{ cursor: "pointer" }}>
-                    <img src={avatar} alt="avatar" />
+                    <img src={avatar} onClick={handleProfile} alt="avatar" />
                   </div>
                   <p className="my-auto">{name ? name : "Anonymous"}</p>
                   {/* <p className="my-auto">{name || "Anonymous"}</p> */}
