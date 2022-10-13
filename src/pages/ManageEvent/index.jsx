@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-// import CardEvent from "../../components/Cardevent";
+import CardEvent from "../../components/Cardevent";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,7 +11,7 @@ import {
   // updateDataProduct,
 } from "../../stores/actions/product";
 
-export default function Manageevent() {
+export default function ManageEvent() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product);
   console.log(product);
@@ -144,11 +144,12 @@ export default function Manageevent() {
             ) : (
               <div>{isUpdate ? "Update" : "Save"}</div>
             )} */}
+            Save
           </button>
         </form>
       </div>
       <main className="container d-flex gap-3 my-5">
-        {/* {product.data.length > 0 ? (
+        {product.data.length > 0 ? (
           product.data.map((item) => (
             <div key={item.id}>
               <CardEvent data={item} setUpdate={setUpdate} />
@@ -156,9 +157,9 @@ export default function Manageevent() {
           ))
         ) : (
           <h1>Data Not Found !</h1>
-        )} */}
+        )}
       </main>
-      <button onClick={setUpdate}>Save</button>
+      <button onClick={setUpdate}></button>
       <Footer />
     </>
   );
