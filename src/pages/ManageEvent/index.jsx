@@ -158,7 +158,7 @@ export default function Manageevent() {
           <h1>Data Not Found !</h1>
         )} */}
       </main>
-      <button onClick={setUpdate}></button>
+      <button onClick={setUpdate}>Save</button>
       <Footer />
     </>
   );
