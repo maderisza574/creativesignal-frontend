@@ -9,6 +9,9 @@ function ProfileLeft() {
   const EditProfile = () => {
     navigate("/profileedit");
   };
+  const CreateEvent = () => {
+    navigate("/manage-event");
+  };
   return (
     <div>
       <div className="card bg-light d-flex">
@@ -63,6 +66,19 @@ function ProfileLeft() {
                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" />
               </svg>
               Change Password
+            </div>
+            <div className="fs-5 mb-3 p-2" onClick={CreateEvent}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-plus-circle-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+              </svg>
+              Create Event
             </div>
             <div className="fs-5 mb-3 p-2">
               <svg
