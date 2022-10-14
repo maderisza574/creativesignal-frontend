@@ -1,29 +1,29 @@
 import axios from "../../utils/axios";
 
-export const getDataProduct = () => {
+export const getDataEvent = () => {
   return {
-    type: "GET_DATA_PRODUCT",
+    type: "GET_DATA_EVENT",
     payload: axios.get(`api/event?page=&limit=&name=&sort=&dateTimeShow=`),
   };
 };
 
-export const createDataProduct = (data) => {
+export const createDataEvent = (data) => {
   return {
-    type: "CREATE_DATA_PRODUCT",
-    payload: axios.post("product", data),
+    type: "CREATE_DATA_EVENT",
+    payload: axios.post("api/event", data),
   };
 };
 
-export const updateDataProduct = (data, id) => {
-  return {
-    type: "UPDATE_DATA_PRODUCT",
-    payload: axios.patch(`product/${id}`, data),
-  };
-};
+// export const updateDataProduct = (data, id) => {
+//   return {
+//     type: "UPDATE_DATA_PRODUCT",
+//     payload: axios.patch(`product/${id}`, data),
+//   };
+// };
 
-export const deleteDataProduct = (id) => {
-  return {
-    type: "DELETE_DATA_PRODUCT",
-    payload: axios.delete(`product/${id}`),
-  };
-};
+// export const deleteDataProduct = (id) => {
+//   return {
+//     type: "DELETE_DATA_PRODUCT",
+//     payload: axios.delete(`product/${id}`),
+//   };
+// };

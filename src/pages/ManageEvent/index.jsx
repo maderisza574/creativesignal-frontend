@@ -6,8 +6,8 @@ import CardEvent from "../../components/Cardevent";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getDataProduct,
-  // createDataProduct,
+  getDataEvent,
+  createDataEvent,
   // updateDataProduct,
 } from "../../stores/actions/product";
 
@@ -21,7 +21,7 @@ export default function ManageEvent() {
   const [isUpdate, setIsUpdate] = useState(false);
   console.log(productId);
   useEffect(() => {
-    dispatch(getDataProduct());
+    dispatch(getDataEvent());
   }, []);
 
   const handleSubmit = (e) => {
@@ -34,7 +34,7 @@ export default function ManageEvent() {
     // formData.append("name", "aaa")
     // formData.append("price", "123")
     // formData.append("image", File)
-
+    dispatch(createDataEvent(formData));
     // dispatch(createDataProduct(formData)).then(() => {
     //   dispatch(getDataProduct());
     //   resetForm();
@@ -90,7 +90,7 @@ export default function ManageEvent() {
       setForm({ ...form, [name]: value });
     }
   };
-
+  // fungsi untuk gambar dan input
   return (
     <>
       <Header />
@@ -111,13 +111,37 @@ export default function ManageEvent() {
         )} */}
 
         <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
-          <label className="me-3">Input Name</label>
+          <label className="me-3">Input Category</label>
           <input
             type="text"
             className="w-100"
-            name="name"
+            name="category"
             onChange={handleChangeForm}
-            value={form.name}
+            value={form.category}
+          />
+          <label className="me-3 mt-3">Input Location</label>
+          <input
+            type="text"
+            className="w-100"
+            name="location"
+            onChange={handleChangeForm}
+            value={form.location}
+          />
+          <label className="me-3 mt-3">Input Detail</label>
+          <input
+            type="text"
+            className="w-100"
+            name="detail"
+            onChange={handleChangeForm}
+            value={form.detail}
+          />
+          <label className="me-3 mt-3">Input Date Time Show</label>
+          <input
+            type="datetime-local"
+            className="w-100"
+            name="dateTimeShow"
+            onChange={handleChangeForm}
+            value={form.dateTimeShow}
           />
           <label className="me-3 mt-3">Input Price</label>
           <input
