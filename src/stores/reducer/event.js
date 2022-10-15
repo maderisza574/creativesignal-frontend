@@ -5,7 +5,7 @@ const initialState = {
   message: "",
 };
 
-const product = (state = initialState, action) => {
+const event = (state = initialState, action) => {
   switch (action.type) {
     case "RESET_MESSAGE": {
       return {
@@ -13,25 +13,25 @@ const product = (state = initialState, action) => {
         message: "",
       };
     }
-    case "GET_DATA_PRODUCT_PENDING": {
+    case "GET_DATA_EVENT_PENDING": {
       return {
         ...state,
         data: [],
       };
     }
-    case "GET_DATA_PRODUCT_FULFILLED": {
+    case "GET_DATA_EVENT_FULFILLED": {
       return {
         ...state,
         data: action.payload.data.data,
       };
     }
-    case "GET_DATA_PRODUCT_REJECTED": {
+    case "GET_DATA_EVENT_REJECTED": {
       return {
         ...state,
         data: [],
       };
     }
-    case "CREATE_DATA_PRODUCT_PENDING": {
+    case "CREATE_DATA_EVENT_PENDING": {
       return {
         ...state,
         isLoading: true,
@@ -39,7 +39,7 @@ const product = (state = initialState, action) => {
         message: "",
       };
     }
-    case "CREATE_DATA_PRODUCT_FULFILLED": {
+    case "CREATE_DATA_EVENT_FULFILLED": {
       return {
         ...state,
         isLoading: false,
@@ -47,7 +47,7 @@ const product = (state = initialState, action) => {
         message: action.payload.data.message,
       };
     }
-    case "CREATE_DATA_PRODUCT_REJECTED": {
+    case "CREATE_DATA_EVENT_REJECTED": {
       return {
         ...state,
         isLoading: false,
@@ -55,7 +55,7 @@ const product = (state = initialState, action) => {
         message: action.payload.data.message,
       };
     }
-    case "UPDATE_DATA_PRODUCT_PENDING": {
+    case "UPDATE_DATA_EVENT_PENDING": {
       return {
         ...state,
         isLoading: true,
@@ -63,7 +63,7 @@ const product = (state = initialState, action) => {
         message: "",
       };
     }
-    case "UPDATE_DATA_PRODUCT_FULFILLED": {
+    case "UPDATE_DATA_EVENT_FULFILLED": {
       return {
         ...state,
         isLoading: false,
@@ -71,7 +71,7 @@ const product = (state = initialState, action) => {
         message: action.payload.data.message,
       };
     }
-    case "UPDATE_DATA_PRODUCT_REJECTED": {
+    case "UPDATE_DATA_EVENT_REJECTED": {
       return {
         ...state,
         isLoading: false,
@@ -79,7 +79,7 @@ const product = (state = initialState, action) => {
         message: action.payload.data.message,
       };
     }
-    case "DELETE_DATA_PRODUCT_PENDING": {
+    case "DELETE_DATA_EVENT_PENDING": {
       return {
         ...state,
         isLoading: true,
@@ -87,7 +87,7 @@ const product = (state = initialState, action) => {
         message: "",
       };
     }
-    case "DELETE_DATA_PRODUCT_FULFILLED": {
+    case "DELETE_DATA_DELETE_FULFILLED": {
       return {
         ...state,
         isLoading: false,
@@ -95,7 +95,7 @@ const product = (state = initialState, action) => {
         message: action.payload.data.message,
       };
     }
-    case "DELETE_DATA_PRODUCT_REJECTED": {
+    case "DELETE_DATA_DELETE_REJECTED": {
       return {
         ...state,
         isLoading: false,
@@ -109,4 +109,4 @@ const product = (state = initialState, action) => {
   }
 };
 
-export default product;
+export default event;

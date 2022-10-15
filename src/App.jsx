@@ -15,6 +15,8 @@ import ProfileLeft from "./components/ProfileLeft";
 import ProfileDetail from "./components/ProfileDetail";
 import EditProfile from "./components/EditProfile";
 import ChangePass from "./components/ChangePass";
+import CreateEvent from "./components/CreateEvent";
+
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +37,7 @@ function App() {
           <Route path="/profiledetail" element={<ProfileDetail />} />
           <Route path="/profileedit" element={<EditProfile />} />
           <Route path="/changepass" element={<ChangePass />} />
+          <Route path="/createevent" element={<CreateEvent />} />
         </Route>
         {/* Private admin ROute */}
         <Route element={<PrivateRoute isAdmin={true} />}>

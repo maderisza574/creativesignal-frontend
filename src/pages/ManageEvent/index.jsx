@@ -9,7 +9,7 @@ import {
   getDataEvent,
   createDataEvent,
   // updateDataProduct,
-} from "../../stores/actions/product";
+} from "../../stores/actions/event";
 
 export default function ManageEvent() {
   const dispatch = useDispatch();
@@ -30,18 +30,16 @@ export default function ManageEvent() {
     const formData = new FormData();
     for (const data in form) {
       formData.append(data, form[data]);
+      console.log(data);
     }
-    // formData.append("name", "aaa")
-    // formData.append("price", "123")
-    // formData.append("image", File)
-    dispatch(createDataEvent(formData));
-    // dispatch(createDataProduct(formData)).then(() => {
-    //   dispatch(getDataProduct());
-    //   resetForm();
-    //   setTimeout(() => {
-    //     dispatch({ type: "RESET_MESSAGE" });
-    //   }, 3000);
-    // });
+
+    dispatch(createDataEvent(formData)).then(() => {
+      dispatch(getDataEvent());
+      resetForm();
+      setTimeout(() => {
+        dispatch({ type: "RESET_MESSAGE" });
+      }, 3000);
+    });
   };
 
   const setUpdate = (data) => {
@@ -71,14 +69,14 @@ export default function ManageEvent() {
     // });
   };
 
-  // const resetForm = () => {
-  //   setForm({
-  //     name: "",
-  //     price: "",
-  //     image: "",
-  //   });
-  //   setImage("");
-  // };
+  const resetForm = () => {
+    setForm({
+      name: "",
+      price: "",
+      image: "",
+    });
+    setImage("");
+  };
 
   const handleChangeForm = (e) => {
     const { name, value, files } = e.target;
@@ -96,8 +94,8 @@ export default function ManageEvent() {
       <Header />
       <div className="card container p-4">
         <h1 className="text-center">ManageEvent</h1>
-        {/* <hr /> */}
-        {/* {product.message && (
+        <hr />
+        {product.message && (
           <div
             className={
               "alert alert-dismissible fade show " + product.isError
@@ -108,9 +106,17 @@ export default function ManageEvent() {
           >
             {product.message}
           </div>
-        )} */}
+        )}
 
         <form onSubmit={isUpdate ? handleUpdate : handleSubmit}>
+          <label className="me-3">Input Name</label>
+          <input
+            type="text"
+            className="w-100"
+            name="name"
+            onChange={handleChangeForm}
+            value={form.name}
+          />
           <label className="me-3">Input Category</label>
           <input
             type="text"
@@ -137,7 +143,7 @@ export default function ManageEvent() {
           />
           <label className="me-3 mt-3">Input Date Time Show</label>
           <input
-            type="datetime-local"
+            type="text"
             className="w-100"
             name="dateTimeShow"
             onChange={handleChangeForm}
@@ -161,14 +167,13 @@ export default function ManageEvent() {
           {image && <img src={image} alt="view image" />}
 
           <button type="submit" className="w-100 my-5 btn btn-primary">
-            {/* {product.isLoading ? (
+            {product.isLoading ? (
               <div className="spinner-border text-white" role="status">
                 <span className="sr-only"></span>
               </div>
             ) : (
               <div>{isUpdate ? "Update" : "Save"}</div>
-            )} */}
-            Save
+            )}
           </button>
         </form>
       </div>
