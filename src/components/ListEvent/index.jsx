@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-export default function ListEvent(props) {
-  const navigate = useNavigate();
+export default function ListEvent() {
+  // const navigate = useNavigate();
 
-  const handleDetail = () => {
-    navigate(`${props.data.eventid}`);
-  };
+  // const handleDetail = () => {
+  //   navigate(`${prop);
+  // };
   return (
     <div className="row">
       <div className="col col-md-2">
@@ -16,15 +16,11 @@ export default function ListEvent(props) {
           wed
         </div>
       </div>
-      <div className="col col-md-10 bg-warning" onClick={handleDetail}>
-        <h1>{props.data.name}</h1>
+      <div className="col col-md-10 bg-warning">
+        <h1>Title</h1>
         <h5>location</h5>
         <h6>Date</h6>
-        <img
-          className="card-img-top"
-          src={`https://res.cloudinary.com/maderisza/image/upload/v1663492332/${props.data.image}`}
-          alt="Card image cap"
-        />
+
         <button className="btn text-primary">Detail</button>
         <button className="btn text-success">Update</button>
         <button className="btn text-danger">Delete</button>

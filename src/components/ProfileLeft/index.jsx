@@ -10,7 +10,7 @@ function ProfileLeft() {
     navigate("/profileedit");
   };
   const CreateEvent = () => {
-    navigate("/manage-event");
+    navigate("/createevent");
   };
   return (
     <div>
