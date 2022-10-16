@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getDataEvent,
   createDataEvent,
-  // updateDataProduct,
+  updateDataEvent,
 } from "../../stores/actions/event";
 
 export default function ManageEvent() {
@@ -44,10 +44,11 @@ export default function ManageEvent() {
 
   const setUpdate = (data) => {
     setIsUpdate(true);
-    setProductId(data.id);
+    setProductId(data.eventid);
     setForm({
       name: data.name,
-      price: data.price,
+      category: data.category,
+      location: data.location,
       image: data.image,
     });
   };
@@ -59,14 +60,14 @@ export default function ManageEvent() {
       formData.append(data, form[data]);
     }
 
-    // dispatch(updateDataProduct(formData, productId)).then(() => {
-    //   dispatch(getDataProduct());
-    //   setIsUpdate(false);
-    //   resetForm();
-    //   setTimeout(() => {
-    //     dispatch({ type: "RESET_MESSAGE" });
-    //   }, 3000);
-    // });
+    dispatch(updateDataEvent(formData, productId)).then(() => {
+      dispatch(getDataEvent());
+      setIsUpdate(false);
+      resetForm();
+      setTimeout(() => {
+        dispatch({ type: "RESET_MESSAGE" });
+      }, 3000);
+    });
   };
 
   const resetForm = () => {

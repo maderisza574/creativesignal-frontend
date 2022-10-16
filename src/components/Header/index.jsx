@@ -7,7 +7,10 @@ export default function Header() {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("token");
   const name = "";
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
@@ -18,6 +21,7 @@ export default function Header() {
   const handleHome = () => {
     navigate("/");
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-white">
@@ -71,6 +75,33 @@ export default function Header() {
                   </div>
                   <p className="my-auto">{name ? name : "Anonymous"}</p>
                   {/* <p className="my-auto">{name || "Anonymous"}</p> */}
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-white dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    ></button>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <a className="dropdown-item" onClick={handleProfile}>
+                          Profile
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          className="text-danger dropdown-item"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </>
               ) : (
                 <>

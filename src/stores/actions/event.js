@@ -14,12 +14,12 @@ export const createDataEvent = (data) => {
   };
 };
 
-// export const updateDataProduct = (data, id) => {
-//   return {
-//     type: "UPDATE_DATA_PRODUCT",
-//     payload: axios.patch(`product/${id}`, data),
-//   };
-// };
+export const updateDataEvent = (data, eventid) => {
+  return {
+    type: "UPDATE_DATA_EVENT",
+    payload: axios.patch(`api/event/${eventid}`, data),
+  };
+};
 
 // export const deleteDataProduct = (id) => {
 //   return {
