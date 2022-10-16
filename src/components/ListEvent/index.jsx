@@ -1,12 +1,12 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function ListEvent() {
-  // const navigate = useNavigate();
+export default function ListEvent(props) {
+  const navigate = useNavigate();
 
-  // const handleDetail = () => {
-  //   navigate(`${prop);
-  // };
+  const handleDetail = () => {
+    navigate(`/detail/${props.data.eventid}`);
+  };
   return (
     <div className="row">
       <div className="col col-md-2">
@@ -17,13 +17,30 @@ export default function ListEvent() {
         </div>
       </div>
       <div className="col col-md-10 bg-warning">
-        <h1>Title</h1>
-        <h5>location</h5>
+        <h1>title {props.data.name}</h1>
+        <h5>category{props.data.category}</h5>
         <h6>Date</h6>
-
-        <button className="btn text-primary">Detail</button>
-        <button className="btn text-success">Update</button>
-        <button className="btn text-danger">Delete</button>
+        {/* <img
+          className="card-img-top"
+          src={`https://res.cloudinary.com/maderisza/image/upload/v1663492332/${props.data.image}`}
+          alt="Card image cap"
+        /> */}
+        <button className="btn text-primary" onClick={handleDetail}>
+          Detail
+        </button>
+        {/* {props.manageEvent ? ( */}
+        <>
+          <button
+            className="btn btn-secondary"
+            // onClick={() => props.setUpdate(props.data)}
+          >
+            Update
+          </button>
+          <button className="btn btn-danger">Delete</button>
+        </>
+        {/* ) : (
+          ""
+        )} */}
       </div>
     </div>
   );

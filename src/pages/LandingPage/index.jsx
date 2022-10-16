@@ -26,6 +26,7 @@ function Landing() {
   const [keyword, setKeyword] = useState("");
   const [searchName, setSearchName] = useState("");
 
+  console.log(data);
   useEffect(() => {
     getDataProduct();
   }, []);
