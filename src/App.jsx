@@ -16,6 +16,9 @@ import ProfileDetail from "./components/ProfileDetail";
 import EditProfile from "./components/EditProfile";
 import ChangePass from "./components/ChangePass";
 import CreateEvent from "./components/CreateEvent";
+import UpdateProfile from "./pages/UpdateProfile";
+import CreateBooking from "./components/CreateBooking";
+import WishlistPage from "./components/WishlistPage";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
           <Route path="/profileedit" element={<EditProfile />} />
           <Route path="/changepass" element={<ChangePass />} />
           <Route path="/createevent" element={<CreateEvent />} />
+          <Route path="/updateprofile" element={<UpdateProfile />} />
+          <Route path="/createbooking" element={<CreateBooking />} />
+          <Route path="/wishlistpage" element={<WishlistPage />} />
         </Route>
         {/* Private admin ROute */}
         <Route element={<PrivateRoute isAdmin={true} />}>
