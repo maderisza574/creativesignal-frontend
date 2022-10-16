@@ -16,6 +16,7 @@ function Profiledetail() {
   // useEffect(() => {
   //   dispatch(getDataUser(userid));
   // }, [userid]);
+  // const [user, setUser] = useState(false);
 
   const getUserData = async () => {
     try {
@@ -27,9 +28,31 @@ function Profiledetail() {
     }
   };
   useEffect(() => {
-    getUserData(userid);
-  }, [userid]);
-
+    getUserData();
+  }, []);
+  const [form, setForm] = useState({
+    name: "",
+    username: "",
+    gender: "",
+    profession: "",
+    nationality: "",
+    dateofBirth: "",
+    email: "",
+  });
+  console.log(setForm);
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async () => {
+    try {
+      const result = await axios.patch(`api/user/${userid}`, form);
+      console.log(form);
+      // setUser(!user);
+      alert(result.data.message);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
   return (
     <div>
       <Header />
@@ -49,8 +72,9 @@ function Profiledetail() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="Old Password"
-                      name="Old Password"
+                      type="text"
+                      name="name"
+                      onChange={handleChangeForm}
                       className="form-control"
                       placeholder={data[0]?.name}
                       aria-label="old Password"
@@ -72,9 +96,10 @@ function Profiledetail() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="Old Password"
-                      name="Old Password"
+                      type="text"
+                      name="username"
                       className="form-control"
+                      onChange={handleChangeForm}
                       placeholder={data[0]?.username}
                       aria-label="old Password"
                     />
@@ -90,14 +115,15 @@ function Profiledetail() {
               {/* row3 */}
               <div className="row">
                 <div className="col col-md-2 bg-white">
-                  <h6>Email</h6>
+                  <h6>Gender</h6>
                 </div>
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="Old Password"
-                      name="Old Password"
+                      type="text"
+                      name="gender"
                       className="form-control"
+                      onChange={handleChangeForm}
                       placeholder={data[0]?.gender}
                       aria-label="old Password"
                     />
@@ -113,51 +139,16 @@ function Profiledetail() {
               {/* row3 */}
               <div className="row">
                 <div className="col col-md-2 bg-white">
-                  <h6>Phone Number</h6>
-                </div>
-                <div className="col col-md-5 bg-white">
-                  <div className="input-group mb-3 w-75">
-                    <input
-                      type="Old Password"
-                      name="Old Password"
-                      className="form-control"
-                      placeholder={data[0]?.profession}
-                      aria-label="old Password"
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* end row 3 */}
-              {/* row3 */}
-              <div className="row">
-                <div className="col col-md-2 bg-white">
-                  <h6>Gender</h6>
-                </div>
-                <div className="col col-md-5 bg-white">
-                  <div className="input-group mb-3 w-75">
-                    <input
-                      type="Old Password"
-                      name="Old Password"
-                      className="form-control"
-                      placeholder={data[0]?.nationality}
-                      aria-label="old Password"
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* end row 3 */}
-              {/* row3 */}
-              <div className="row">
-                <div className="col col-md-2 bg-white">
                   <h6>Profession</h6>
                 </div>
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="Old Password"
-                      name="Old Password"
+                      type="text"
+                      name="profession"
                       className="form-control"
-                      placeholder={data[0]?.dateofBirth}
+                      onChange={handleChangeForm}
+                      placeholder={data[0]?.profession}
                       aria-label="old Password"
                     />
                   </div>
@@ -172,9 +163,48 @@ function Profiledetail() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="Old Password"
-                      name="Old Password"
+                      type="text"
+                      name="nationality"
                       className="form-control"
+                      onChange={handleChangeForm}
+                      placeholder={data[0]?.nationality}
+                      aria-label="old Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* end row 3 */}
+              {/* row3 */}
+              <div className="row">
+                <div className="col col-md-2 bg-white">
+                  <h6>Date Of Birth</h6>
+                </div>
+                <div className="col col-md-5 bg-white">
+                  <div className="input-group mb-3 w-75">
+                    <input
+                      type="text"
+                      name="dateofBirth"
+                      className="form-control"
+                      onChange={handleChangeForm}
+                      placeholder={data[0]?.dateofBirth}
+                      aria-label="old Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* end row 3 */}
+              {/* row3 */}
+              <div className="row">
+                <div className="col col-md-2 bg-white">
+                  <h6>Email</h6>
+                </div>
+                <div className="col col-md-5 bg-white">
+                  <div className="input-group mb-3 w-75">
+                    <input
+                      type="text"
+                      name="email"
+                      className="form-control"
+                      onChange={handleChangeForm}
                       placeholder={data[0]?.email}
                       aria-label="old Password"
                     />
@@ -183,25 +213,16 @@ function Profiledetail() {
               </div>
               {/* end row 3 */}
               {/* row 4 */}
-              <div className="row">
-                <div className="col col-md-2 bg-white">
-                  <h6>Birthday Date</h6>
-                </div>
-                <div className="col col-md-5 bg-white mb-3">
-                  <div className="input-group mb-3 w-75">
-                    <input
-                      type="Old Password"
-                      name="Old Password"
-                      className="form-control-plain-text "
-                      aria-label="old Password"
-                      placeholder={data[0]?.dateofBirth}
-                    />
-                  </div>
-                </div>
-              </div>
+
               <div className="row">
                 <div className="col">
-                  <div className="btn btn-primary">Submit</div>
+                  <div
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </div>
                 </div>
               </div>
               {/* row 3 */}
