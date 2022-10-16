@@ -1,5 +1,5 @@
 const initialState = {
-  data: {},
+  data: [],
 };
 
 const user = (state = initialState, action) => {
@@ -13,7 +13,7 @@ const user = (state = initialState, action) => {
     case "GET_USER_BY_ID_PENDING": {
       return {
         ...state,
-        data: {},
+        data: [],
       };
     }
     case "GET_USER_BY_ID_FULFILLED": {
@@ -25,7 +25,7 @@ const user = (state = initialState, action) => {
     case "GET_USER_BY_ID_REJECTED": {
       return {
         ...state,
-        data: {},
+        data: [],
       };
     }
     default: {

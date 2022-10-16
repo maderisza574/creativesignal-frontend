@@ -18,6 +18,9 @@ function ProfileLeft() {
   const WishlistPage = () => {
     navigate("/wishlistpage");
   };
+  const Profile = () => {
+    navigate("/profile");
+  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/signin");
@@ -33,7 +36,7 @@ function ProfileLeft() {
               <br />
               Enterprenuer.ID
             </div>
-            <div className="fs-5 mb-3">
+            <div className="fs-5 mb-3" onClick={Profile}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

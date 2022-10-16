@@ -13,6 +13,7 @@ export default function ListEvent(props) {
   const [productId, setProductId] = useState("");
   const [form, setForm] = useState({});
   const [image, setImage] = useState("");
+  console.log(image);
   const navigate = useNavigate();
   const [isUpdate, setIsUpdate] = useState(false);
   const handleDetail = () => {
@@ -84,6 +85,7 @@ export default function ListEvent(props) {
       setForm({ ...form, [name]: value });
     }
   };
+  const showDataImage = `https://res.cloudinary.com/maderisza/image/upload/v1663492332/${props.data.image}`;
   return (
     <div className="row">
       <div className="col col-md-2">
@@ -109,6 +111,7 @@ export default function ListEvent(props) {
             className="w-100"
             name="name"
             onChange={handleChangeForm}
+            placeholder={props.data.name}
             value={form.name}
           />
           <label className="me-3">Input Category</label>
@@ -117,6 +120,7 @@ export default function ListEvent(props) {
             className="w-100"
             name="category"
             onChange={handleChangeForm}
+            placeholder={props.data.category}
             value={form.category}
           />
           <label className="me-3 mt-3">Input Location</label>
@@ -125,6 +129,7 @@ export default function ListEvent(props) {
             className="w-100"
             name="location"
             onChange={handleChangeForm}
+            placeholder={props.data.location}
             value={form.location}
           />
           <label className="me-3 mt-3">Input Detail</label>
@@ -132,6 +137,7 @@ export default function ListEvent(props) {
             type="text"
             className="w-100"
             name="detail"
+            placeholder={props.data.detail}
             onChange={handleChangeForm}
             value={form.detail}
           />
@@ -141,6 +147,7 @@ export default function ListEvent(props) {
             className="w-100"
             name="dateTimeShow"
             onChange={handleChangeForm}
+            placeholder={props.data.dateTimeShow}
             value={form.dateTimeShow}
           />
           <label className="me-3 mt-3">Input Price</label>
@@ -149,6 +156,7 @@ export default function ListEvent(props) {
             className="w-100"
             name="price"
             onChange={handleChangeForm}
+            placeholder={props.data.price}
             value={form.price}
           />
           <label className="me-3 mt-3">Input Image</label>
@@ -158,7 +166,9 @@ export default function ListEvent(props) {
             name="image"
             onChange={handleChangeForm}
           />
-          {image && <img src={image} alt="view image" />}
+          {/* {image && (
+            )} */}
+          <img src={showDataImage} alt="view image" className="w-50" />
 
           <button type="submit" className="w-100 my-5 btn btn-primary">
             {product.isLoading ? (

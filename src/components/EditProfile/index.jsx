@@ -2,63 +2,34 @@ import Header from "../Header";
 import Johnicon from "../../assets/img/john.png";
 import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
-// Implement Redux
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getDataUser, updateDataUser } from "../../stores/actions/editprofile";
-function EditProfile() {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  console.log(user);
-  const [form, setForm] = useState({});
-  const [image, setImage] = useState("");
-  const [userid, setUserId] = useState("");
-  // const [isUpdate, setIsUpdate] = useState(false);
-  console.log(userid);
-  console.log(setUserId);
+// import { getDataUser } from "../../stores/actions/user";
+// import { useSelector, useDispatch } from "react-redux";
+import axios from "../../utils/axios";
+import { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+function Profiledetail() {
+  const userid = localStorage.getItem("idUser");
+  const [data, setData] = useState([]);
+  console.log(data[0]?.username);
+  // const user = useSelector((state) => state.user);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getDataUser(userid));
+  // }, [userid]);
+
+  const getUserData = async () => {
+    try {
+      const result = await axios.get(`api/user/${userid}`);
+      setData(result.data.data);
+      // setDefaultImage(response.data.data[0].image);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    dispatch(getDataUser());
-  }, []);
+    getUserData(userid);
+  }, [userid]);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    for (const data in form) {
-      formData.append(data, form[data]);
-      console.log(data);
-    }
-    dispatch(updateDataUser(formData)).then(() => {
-      dispatch(getDataUser());
-      // resetForm();
-      setTimeout(() => {
-        dispatch({ type: "RESET_MESSAGE" });
-      }, 3000);
-    });
-  };
-
-  // const resetForm = () =>{
-  //   setForm({
-  //     name: ""
-  //     username: ""
-  //     gender:""
-  //     profession:""
-  //     nationality:""
-  //     dateofBirth:""
-  //     email:""
-  //   });
-  //   setImage("");
-  // };
-
-  const handleChangeForm = (e) => {
-    const { name, value, files } = e.target;
-
-    if (name === "image") {
-      setForm({ ...form, [name]: files[0] });
-      setImage(URL.createObjectURL(files[0]));
-    } else {
-      setForm({ ...form, [name]: value });
-    }
-  };
   return (
     <div>
       <Header />
@@ -69,20 +40,7 @@ function EditProfile() {
           </div>
           <div className="right col bg-light py-5">
             <div className="container justify-content-center w-70 rounded bg-white ">
-              <h6 className="mb-3 mt-2">Edit Profile</h6>
-              <hr />
-              {user.message && (
-                <div
-                  className={
-                    "alert alert-dismissible fade show " + user.isError
-                      ? "alert-danger"
-                      : "alert-primary"
-                  }
-                  role="alert"
-                >
-                  {user.message}
-                </div>
-              )}
+              <h3 className="mb-3 mt-2">Edit Profile</h3>
               {/* row 1 */}
               <div className="row">
                 <div className="col col-md-2 bg-white">
@@ -91,13 +49,11 @@ function EditProfile() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="text"
-                      name="name"
+                      type="Old Password"
+                      name="Old Password"
                       className="form-control"
-                      placeholder="Name"
-                      onChange={handleChangeForm}
+                      placeholder={data[0]?.name}
                       aria-label="old Password"
-                      value={form.name}
                     />
                   </div>
                 </div>
@@ -116,22 +72,17 @@ function EditProfile() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="text"
-                      name="username"
+                      type="Old Password"
+                      name="Old Password"
                       className="form-control"
-                      placeholder="Username"
-                      onChange={handleChangeForm}
+                      placeholder={data[0]?.username}
                       aria-label="old Password"
-                      value={form.username}
                     />
                   </div>
                 </div>
                 <div className="col bg-white">
                   <div className="buttonsign d-grid mt-3">
-                    <input className="btn btn-primary" type="file">
-                      {image && <img src={image} alt="view image" />}
-                      Choose Photo
-                    </input>
+                    <button className="btn btn-primary">Choose Photo</button>
                   </div>
                 </div>
               </div>
@@ -139,18 +90,16 @@ function EditProfile() {
               {/* row3 */}
               <div className="row">
                 <div className="col col-md-2 bg-white">
-                  <h6>Gender</h6>
+                  <h6>Email</h6>
                 </div>
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="text"
-                      name="gender"
+                      type="Old Password"
+                      name="Old Password"
                       className="form-control"
-                      placeholder="gender"
+                      placeholder={data[0]?.gender}
                       aria-label="old Password"
-                      onChange={handleChangeForm}
-                      value={form.email}
                     />
                   </div>
                 </div>
@@ -164,18 +113,52 @@ function EditProfile() {
               {/* row3 */}
               <div className="row">
                 <div className="col col-md-2 bg-white">
+                  <h6>Phone Number</h6>
+                </div>
+                <div className="col col-md-5 bg-white">
+                  <div className="input-group mb-3 w-75">
+                    <input
+                      type="Old Password"
+                      name="Old Password"
+                      className="form-control"
+                      placeholder={data[0]?.profession}
+                      aria-label="old Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* end row 3 */}
+              {/* row3 */}
+              <div className="row">
+                <div className="col col-md-2 bg-white">
+                  <h6>Gender</h6>
+                </div>
+                <div className="col col-md-5 bg-white">
+                  <div className="input-group mb-3 w-75">
+                    <input
+                      type="Old Password"
+                      name="Old Password"
+                      className="form-control"
+                      placeholder={data[0]?.nationality}
+                      aria-label="old Password"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* end row 3 */}
+              {/* row3 */}
+              <div className="row">
+                <div className="col col-md-2 bg-white">
                   <h6>Profession</h6>
                 </div>
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="text"
-                      name="Profession"
+                      type="Old Password"
+                      name="Old Password"
                       className="form-control"
-                      placeholder="Profession"
+                      placeholder={data[0]?.dateofBirth}
                       aria-label="old Password"
-                      onChange={handleChangeForm}
-                      value={form.profession}
                     />
                   </div>
                 </div>
@@ -189,53 +172,11 @@ function EditProfile() {
                 <div className="col col-md-5 bg-white">
                   <div className="input-group mb-3 w-75">
                     <input
-                      type="text"
-                      name="nationality"
+                      type="Old Password"
+                      name="Old Password"
                       className="form-control"
-                      placeholder="nationality"
+                      placeholder={data[0]?.email}
                       aria-label="old Password"
-                      onChange={handleChangeForm}
-                      value={form.nationality}
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* end row 3 */}
-              {/* row3 */}
-              <div className="row">
-                <div className="col col-md-2 bg-white">
-                  <h6>Date Of Birth</h6>
-                </div>
-                <div className="col col-md-5 bg-white">
-                  <div className="input-group mb-3 w-75">
-                    <input
-                      type="text"
-                      name="dateofbirth"
-                      className="form-control"
-                      placeholder="Profession"
-                      aria-label="old Password"
-                      onChange={handleChangeForm}
-                      value={form.dateofBirth}
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* end row 3 */}
-              {/* row3 */}
-              <div className="row">
-                <div className="col col-md-2 bg-white">
-                  <h6>email</h6>
-                </div>
-                <div className="col col-md-5 bg-white">
-                  <div className="input-group mb-3 w-75">
-                    <input
-                      type="text"
-                      name="email"
-                      className="form-control"
-                      placeholder="Nationality"
-                      aria-label="old Password"
-                      onChange={handleChangeForm}
-                      value={form.email}
                     />
                   </div>
                 </div>
@@ -246,42 +187,36 @@ function EditProfile() {
                 <div className="col col-md-2 bg-white">
                   <h6>Birthday Date</h6>
                 </div>
-                <div className="col col-md-5 bg-white">
+                <div className="col col-md-5 bg-white mb-3">
                   <div className="input-group mb-3 w-75">
                     <input
                       type="Old Password"
                       name="Old Password"
-                      className="form-control"
-                      placeholder="Birthday Date"
+                      className="form-control-plain-text "
                       aria-label="old Password"
-                      onChange={handleChangeForm}
+                      placeholder={data[0]?.dateofBirth}
                     />
                   </div>
                 </div>
-                <div className="buttonsign d-grid mt-4 mb-5">
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleSave}
-                    type="button"
-                  >
-                    Save
-                  </button>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <div className="btn btn-primary">Submit</div>
                 </div>
               </div>
               {/* row 3 */}
             </div>
+            {/* </div> */}
           </div>
         </div>
+        <div className="container-fluid bg-danger"></div>
+        <Footer />
       </div>
-      {/* <div className="container-fluid bg-danger"> */}
-
-      {/* </div> */}
-      <Footer />
+      {/* //{" "} */}
     </div>
-    //   </div>
     //   <h1>Profile Page</h1>
     // </div>
   );
 }
 
-export default EditProfile;
+export default Profiledetail;
