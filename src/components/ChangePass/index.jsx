@@ -2,7 +2,45 @@ import Header from "../../components/Header";
 // import Johnicon from "../../assets/img/john.png";
 import ProfileLeft from "../../components/ProfileLeft";
 import Footer from "../../components/Footer";
+import axios from "../../utils/axios";
+import { useEffect, useState } from "react";
+
 function ChangePass() {
+  const userid = localStorage.getItem("idUser");
+  const [data, setData] = useState([]);
+  console.log(data);
+
+  const getUserData = async () => {
+    try {
+      const result = await axios.get(`api/user/updateUserPass/${userid}`);
+      setData(result.data.data);
+      // setDefaultImage(response.data.data[0].image);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getUserData();
+  }, []);
+  const [form, setForm] = useState({
+    oldPass: "",
+    newPass: "",
+    confirmPass: "",
+  });
+  console.log(setForm);
+  const handleChangeForm = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async () => {
+    try {
+      const result = await axios.patch(`api/user/${userid}`, form);
+      console.log(form);
+      // setUser(!user);
+      alert(result.data.message);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
   return (
     <div>
       <Header />
@@ -24,6 +62,7 @@ function ChangePass() {
                     <input
                       type="Old Password"
                       name="Old Password"
+                      onChange={handleChangeForm}
                       className="form-control"
                       placeholder="Old Password"
                       aria-label="old Password"
@@ -42,6 +81,7 @@ function ChangePass() {
                     <input
                       type="Old Password"
                       name="Old Password"
+                      onChange={handleChangeForm}
                       className="form-control"
                       placeholder="New Password"
                       aria-label="old Password"
@@ -60,6 +100,7 @@ function ChangePass() {
                     <input
                       type="Old Password"
                       name="Old Password"
+                      onChange={handleChangeForm}
                       className="form-control"
                       placeholder="Confirm Password"
                       aria-label="old Password"
@@ -67,7 +108,11 @@ function ChangePass() {
                   </div>
                 </div>
                 <div className="buttonsign d-grid mt-4 mb-5">
-                  <button className="btn btn-primary" type="button">
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleSubmit}
+                    type="button"
+                  >
                     Update
                   </button>
                 </div>
