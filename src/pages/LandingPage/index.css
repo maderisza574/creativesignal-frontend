@@ -70,3 +70,11 @@
   text-indent: 30px;
   line-height: 30px;
 } */
+@media (max-width: 575.98px) {
+  card-img-overlay {
+    max-width: 10vh !important;
+  }
+  container-fuid {
+    max-width: 30vh !important;
+  }
+}

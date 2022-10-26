@@ -2,21 +2,26 @@ import Header from "../Header";
 import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
 import ListEvent from "../../components/ListEvent";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
 
 // import { getDataEvent } from "../../stores/actions/event";
 import { useEffect, useState } from "react";
 import axios from "../../utils/axios";
 function CreateEvent() {
+  const [show, setShow] = useState(false);
+
   const [data, setData] = useState([]);
   console.log(data);
-  const navigate = useNavigate();
-  const ManageEvent = () => {
-    navigate("/manage-event");
-  };
+  // const navigate = useNavigate();
+  // const ManageEvent = () => {
+  //   navigate("/manage-event");
+  // };
   useEffect(() => {
     getDataEvent();
   }, []);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const getDataEvent = async () => {
     try {
       const result = await axios.get(
@@ -27,6 +32,9 @@ function CreateEvent() {
     } catch (error) {
       console.log(error);
     }
+  };
+  const setUpdate = () => {
+    setShow(true);
   };
   return (
     <div>
@@ -41,19 +49,16 @@ function CreateEvent() {
               <div className="row">
                 <div className="col text-left">Manage Event</div>
                 <div className="col col-md-3 ">
-                  <button className="btn btn-primary" onClick={ManageEvent}>
+                  <button className="btn btn-primary" onClick={handleShow}>
                     Create
                   </button>
                 </div>
               </div>
+
               {data.length > 0 ? (
                 data.map((item) => (
                   <div key={item.id}>
-                    <ListEvent
-                      data={item}
-                      newData="data baru"
-                      // handleDetail={handleDetail}
-                    />
+                    <ListEvent data={item} setUpdate={setUpdate} />
                   </div>
                 ))
               ) : (
@@ -65,7 +70,36 @@ function CreateEvent() {
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <label className="me-3">Input Name</label>
+            <input type="text" className="w-100" name="name" />
+            <label className="me-3">Input Category</label>
+            <input type="text" className="w-100" name="category" />
+            <label className="me-3 mt-3">Input Location</label>
+            <input type="text" className="w-100" name="location" />
+            <label className="me-3 mt-3">Input Detail</label>
+            <input type="text" className="w-100" name="detail" />
+            <label className="me-3 mt-3">Input Date Time Show</label>
+            <input type="text" className="w-100" name="dateTimeShow" />
+            <label className="me-3 mt-3">Input Price</label>
+            <input type="text" className="w-100" name="price" />
+            <label className="me-3 mt-3">Input Image</label>
+            <input type="file" className="w-100" name="image" />
+            {/* {image && (
+            )} */}
+            <img src="" alt="view image" className="w-50" />
 
+            <button type="submit" className="w-100 my-5 btn btn-primary">
+              Save
+            </button>
+          </form>
+        </Modal.Body>
+      </Modal>
       <Footer />
     </div>
   );
