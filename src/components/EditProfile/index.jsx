@@ -1,5 +1,5 @@
 import Header from "../Header";
-import Johnicon from "../../assets/img/john.png";
+// import Johnicon from "../../assets/img/john.png";
 import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
 // import { getDataUser } from "../../stores/actions/user";
@@ -40,6 +40,7 @@ function Profiledetail() {
     email: "",
   });
   console.log(setForm);
+  console.log(data[0]);
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -82,8 +83,15 @@ function Profiledetail() {
                   </div>
                 </div>
                 <div className="col bg-white">
-                  <div className="d-flex justify-content-center">
-                    <img src={Johnicon} alt="" />
+                  <div className="d-flex justify-content-center  ">
+                    <img
+                      src={`https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
+                        data[0]?.image.split(".")[0]
+                      }`}
+                      alt=""
+                      style={{ width: 50, height: 50 }}
+                      className="rounded-circle border border-dark"
+                    />
                   </div>
                 </div>
               </div>
