@@ -115,6 +115,7 @@ function Profiledetail() {
                 </div>
                 <div className="col bg-white">
                   <div className="buttonsign d-grid mt-3">
+                    <input type="file" className="btn btn-primary" />
                     <button className="btn btn-primary">Choose Photo</button>
                   </div>
                 </div>

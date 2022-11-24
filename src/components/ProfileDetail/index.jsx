@@ -1,5 +1,5 @@
 // import Header from "../Header";
-import Johnicon from "../../assets/img/john.png";
+// import Johnicon from "../../assets/img/john.png";
 // import ProfileLeft from "../ProfileLeft";
 // import Footer from "../Footer";
 // import { getDataUser } from "../../stores/actions/user";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 function Profiledetail() {
   const userid = localStorage.getItem("idUser");
   const [data, setData] = useState([]);
-  console.log(data[0]?.username);
+  // console.log(data[0]?.username);
   // const user = useSelector((state) => state.user);
   // const dispatch = useDispatch();
   // useEffect(() => {
@@ -23,7 +23,7 @@ function Profiledetail() {
       setData(result.data.data);
       // setDefaultImage(response.data.data[0].image);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   useEffect(() => {
@@ -60,7 +60,12 @@ function Profiledetail() {
               </div>
               <div className="col bg-white">
                 <div className="d-flex justify-content-center">
-                  <img src={Johnicon} alt="" />
+                  <img
+                    src={`https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
+                      data[0]?.image.split(".")[0]
+                    }`}
+                    style={{ width: 50, height: 50 }}
+                  />
                 </div>
               </div>
             </div>
