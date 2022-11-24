@@ -66,7 +66,7 @@ function Signup() {
               />
               {""}
             </div>
-            <div className="input-group">
+            <div className="input_group_signup">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -75,7 +75,10 @@ function Signup() {
                 placeholder="Your Password"
                 onChange={handleChangeForm}
               />
-              <button className="btn btn-sm" onClick={handleShowPassword}>
+              <button
+                className="btn btn-sm btn-light border border-1"
+                onClick={handleShowPassword}
+              >
                 {showPassword ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

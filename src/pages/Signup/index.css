@@ -17,7 +17,8 @@
   font-size: 15px;
 }
 .forgot {
-  margin-left: 230px;
+  margin-left: 300px;
+  margin-top: 20px;
 }
 .buttonsign {
   margin-left: 80px;
@@ -33,4 +34,8 @@
 }
 .or {
   margin-left: 150px;
+}
+.input-group_signup {
+  width: 82%;
+  margin-left: 50px;
 }
