@@ -15,6 +15,7 @@ function CardEvent(props) {
         <img
           className="card-img-top"
           src={`https://res.cloudinary.com/maderisza/image/upload/v1663492332/${props.data.image}`}
+          // src={`https://res.cloudinary.com/dhohircloud/image/upload/v1663957109/${props.data.image}`}
           alt="Card image cap"
         />
         <div className="card-body">

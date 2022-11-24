@@ -1,9 +1,13 @@
 import logo from "../../assets/img/logo.png";
-import avatar from "../../assets/img/john.png";
+// import avatar from "../../assets/img/john.png";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
+import axios from "../../utils/axios";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const userid = localStorage.getItem("idUser");
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("token");
   const name = "";
@@ -21,6 +25,18 @@ export default function Header() {
   const handleHome = () => {
     navigate("/");
   };
+  const getUserData = async () => {
+    try {
+      const result = await axios.get(`api/user/${userid}`);
+      setData(result.data.data);
+      // setDefaultImage(response.data.data[0].image);
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+  useEffect(() => {
+    getUserData(userid);
+  }, [userid]);
 
   return (
     <div>
@@ -71,7 +87,12 @@ export default function Header() {
               {isLogin ? (
                 <>
                   <div style={{ cursor: "pointer" }}>
-                    <img src={avatar} onClick={handleProfile} alt="avatar" />
+                    <img
+                      src={`https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
+                        data[0]?.image.split(".")[0]
+                      }`}
+                      style={{ width: 50, height: 50 }}
+                    />
                   </div>
                   <p className="my-auto">{name ? name : "Anonymous"}</p>
                   {/* <p className="my-auto">{name || "Anonymous"}</p> */}

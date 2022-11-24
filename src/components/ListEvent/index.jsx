@@ -12,13 +12,13 @@ export default function ListEvent(props) {
   return (
     <div className="row">
       <div className="col col-md-2">
-        <div className=" bg-warning border rounded-3 text-center">
+        <div className="border rounded-3 text-center">
           15
           <br />
           wed
         </div>
       </div>
-      <div className="col col-md-10 bg-warning">
+      <div className="col col-md-10">
         <h1>title {props.data.name}</h1>
         <h5>category{props.data.category}</h5>
         <h6>Date</h6>

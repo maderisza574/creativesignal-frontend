@@ -44,7 +44,8 @@ function Landing() {
   const getDataProduct = async () => {
     try {
       const result = await axios.get(
-        `api/event?page=${page}&limit=4&name=${searchName}&sort=&dateTimeShow=${dateShow}`
+        `api/event?page=${page}&limit=4&name=${searchName}&sort=&dateTimeShow=`
+        // `api/event?page=&searchName=&searchDateShow=&sort=&limit=50`
       );
       setData(result.data.data);
       setPagination(result.data.pagination);
@@ -138,7 +139,7 @@ function Landing() {
             <button
               key={index}
               style={{ margin: "0 10px" }}
-              className={index === 2 ? "active" : ""}
+              className={index === 2 ? "active" : "notactive"}
               onClick={() => selectDate(moment(item).format("YYYY,MM,DD"))}
             >
               <div>{moment(item).format("DD")}</div>

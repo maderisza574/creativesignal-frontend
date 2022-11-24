@@ -2,6 +2,7 @@ import Header from "../Header";
 import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
 import ListEvent from "../../components/ListEvent";
+import "./index.css";
 // import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
@@ -47,9 +48,9 @@ function CreateEvent() {
           <div className="right col bg-light py-5">
             <div className="container justify-content-center w-70 rounded bg-white ">
               <div className="row">
-                <div className="col text-left">Manage Event</div>
+                <div className="col text-left mt-3">Manage Event</div>
                 <div className="col col-md-3 ">
-                  <button className="btn btn-primary" onClick={handleShow}>
+                  <button className="btn btn-primary mt-3" onClick={handleShow}>
                     Create
                   </button>
                 </div>
@@ -70,31 +71,100 @@ function CreateEvent() {
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>Create</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div>
+            <div className="row">
+              <div className="col-md-6">
+                <div>
+                  <form>
+                    <label className="modal__name me-3">Name</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input w-70"
+                      name="name"
+                      placeholder="Input Name Event"
+                    />
+                  </form>
+                </div>
+                <div className="mt-3">
+                  <form>
+                    <label className="modal__name me-3">Location</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input w-70"
+                      name="name"
+                      placeholder="Input Location"
+                    />
+                  </form>
+                </div>
+                <div className="mt-3">
+                  <form>
+                    <label className="modal__name me-3">Price</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input w-70"
+                      name="name"
+                      placeholder="Input Price"
+                    />
+                  </form>
+                </div>
+                <div className="mt-3">
+                  <form>
+                    <label className="modal__name me-3">Detail</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input_detail w-70"
+                      name="name"
+                      placeholder="Input Detail"
+                    />
+                  </form>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mt-3">
+                  <form>
+                    <label className="modal__name me-3">Category</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input w-70"
+                      name="name"
+                      placeholder="Input Category"
+                    />
+                  </form>
+                </div>
+                <div className="mt-3">
+                  <form>
+                    <label className="modal__name me-3">Date Time Show</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      className="modal__input w-70"
+                      name="name"
+                      placeholder="01/01/2022"
+                    />
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <form>
-            <label className="me-3">Input Name</label>
-            <input type="text" className="w-100" name="name" />
-            <label className="me-3">Input Category</label>
-            <input type="text" className="w-100" name="category" />
-            <label className="me-3 mt-3">Input Location</label>
-            <input type="text" className="w-100" name="location" />
-            <label className="me-3 mt-3">Input Detail</label>
-            <input type="text" className="w-100" name="detail" />
-            <label className="me-3 mt-3">Input Date Time Show</label>
-            <input type="text" className="w-100" name="dateTimeShow" />
-            <label className="me-3 mt-3">Input Price</label>
-            <input type="text" className="w-100" name="price" />
             <label className="me-3 mt-3">Input Image</label>
             <input type="file" className="w-100" name="image" />
             {/* {image && (
             )} */}
             <img src="" alt="view image" className="w-50" />
-
-            <button type="submit" className="w-100 my-5 btn btn-primary">
+            <br></br>
+            <button type="submit" className="w-50 btn btn-primary">
               Save
             </button>
           </form>

@@ -14,6 +14,7 @@ function Detail() {
     eventId: eventid,
     userid: userid,
   });
+  console.log(form);
   const [wishlist, setwishlist] = useState(false);
   console.log(setForm);
   console.log(eventid);
@@ -49,9 +50,11 @@ function Detail() {
     try {
       const result = await axios.post("api/wishlist", form);
       setwishlist(!wishlist);
+      console.log(result);
 
       alert(result.data.message);
     } catch (error) {
+      console.log(error.response);
       alert(error.response.data.message);
     }
   };
@@ -72,7 +75,7 @@ function Detail() {
                   className="card card-img"
                 />
               </div>
-              <button className="wishlist" onClick={Addwishlist}>
+              <button className="wishlist btn btn-white" onClick={Addwishlist}>
                 {wishlist ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

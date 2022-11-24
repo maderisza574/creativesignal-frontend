@@ -1,0 +1,15 @@
+.modal__name {
+  font-size: 18px;
+}
+.modal__input {
+  width: 50vh;
+  height: 5vh;
+  border-radius: 5px;
+  border-color: #c1c5d0;
+}
+.modal__input_detail {
+  width: 100vh;
+  height: 10vh;
+  border-radius: 5px;
+  border-color: #c1c5d0;
+}
