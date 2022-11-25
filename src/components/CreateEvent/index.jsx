@@ -3,17 +3,28 @@ import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
 import ListEvent from "../../components/ListEvent";
 import "./index.css";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
-
-// import { getDataEvent } from "../../stores/actions/event";
+import { createDataEvent } from "../../stores/actions/event";
 import { useEffect, useState } from "react";
 import axios from "../../utils/axios";
+
 function CreateEvent() {
+  const dispatch = useDispatch();
+  const event = useSelector((state) => state.event);
+  console.log(event);
   const [show, setShow] = useState(false);
+  const [form, setForm] = useState({});
+  const [image, setImage] = useState("");
+  console.log(image);
+
+  // const [showToast, setShowToast] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  // console.log(isLoading);
+  // console.log(form);
 
   const [data, setData] = useState([]);
-  console.log(data);
+  // console.log(data);
   // const navigate = useNavigate();
   // const ManageEvent = () => {
   //   navigate("/manage-event");
@@ -21,8 +32,12 @@ function CreateEvent() {
   useEffect(() => {
     getDataEvent();
   }, []);
+  // const getData = () => {
+  //   dispatch(getDataEvent());
+  // };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const getDataEvent = async () => {
     try {
       const result = await axios.get(
@@ -36,6 +51,45 @@ function CreateEvent() {
   };
   const setUpdate = () => {
     setShow(true);
+  };
+
+  const resetForm = () => {
+    setForm({
+      name: "",
+      category: "",
+      location: "",
+      detail: "",
+      dateTimeShow: "",
+      price: "",
+      image: "",
+    });
+    setImage("");
+  };
+
+  const handleChangeForm = (e) => {
+    const { name, value, files } = e.target;
+
+    if (name === "image") {
+      setForm({ ...form, [name]: files[0] });
+      setImage(URL.createObjectURL(files[0]));
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+  };
+
+  const createEventHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const data in form) {
+      formData.append(data, form[data]);
+    }
+    dispatch(createDataEvent(formData)).then(() => {
+      dispatch(getDataEvent());
+      resetForm();
+      setTimeout(() => {
+        dispatch({ type: "RESET_MESSAGE" });
+      }, 3000);
+    });
   };
   return (
     <div>
@@ -87,6 +141,7 @@ function CreateEvent() {
                       type="text"
                       className="modal__input w-70"
                       name="name"
+                      onChange={handleChangeForm}
                       placeholder="Input Name Event"
                     />
                   </form>
@@ -98,8 +153,9 @@ function CreateEvent() {
                     <input
                       type="text"
                       className="modal__input w-70"
-                      name="name"
+                      name="location"
                       placeholder="Input Location"
+                      onChange={handleChangeForm}
                     />
                   </form>
                 </div>
@@ -110,8 +166,9 @@ function CreateEvent() {
                     <input
                       type="text"
                       className="modal__input w-70"
-                      name="name"
+                      name="price"
                       placeholder="Input Price"
+                      onChange={handleChangeForm}
                     />
                   </form>
                 </div>
@@ -122,8 +179,9 @@ function CreateEvent() {
                     <input
                       type="text"
                       className="modal__input_detail w-70"
-                      name="name"
+                      name="detail"
                       placeholder="Input Detail"
+                      onChange={handleChangeForm}
                     />
                   </form>
                 </div>
@@ -136,8 +194,9 @@ function CreateEvent() {
                     <input
                       type="text"
                       className="modal__input w-70"
-                      name="name"
+                      name="category"
                       placeholder="Input Category"
+                      onChange={handleChangeForm}
                     />
                   </form>
                 </div>
@@ -148,26 +207,28 @@ function CreateEvent() {
                     <input
                       type="text"
                       className="modal__input w-70"
-                      name="name"
+                      name="dateTimeShow"
                       placeholder="01/01/2022"
+                      onChange={handleChangeForm}
                     />
                   </form>
                 </div>
               </div>
             </div>
-          </div>
+            <label className="mt-3">Input Image</label>
+            <input
+              type="file"
+              className="modal__input w-70"
+              name="image"
+              onChange={handleChangeForm}
+            />
+            {image && <img src={image} alt="view image" />}
 
-          <form>
-            <label className="me-3 mt-3">Input Image</label>
-            <input type="file" className="w-100" name="image" />
-            {/* {image && (
-            )} */}
-            <img src="" alt="view image" className="w-50" />
-            <br></br>
-            <button type="submit" className="w-50 btn btn-primary">
+            <button className="btn btn-primary" onClick={createEventHandler}>
               Save
             </button>
-          </form>
+            <button>Update</button>
+          </div>
         </Modal.Body>
       </Modal>
       <Footer />

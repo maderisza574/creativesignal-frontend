@@ -21,9 +21,9 @@ export const updateDataEvent = (data, eventid) => {
   };
 };
 
-// export const deleteDataProduct = (id) => {
-//   return {
-//     type: "DELETE_DATA_PRODUCT",
-//     payload: axios.delete(`product/${id}`),
-//   };
-// };
+export const deleteDataEvent = (eventid) => {
+  return {
+    type: "DELETE_DATA_PRODUCT",
+    payload: axios.delete(`api/event/${eventid}`),
+  };
+};
