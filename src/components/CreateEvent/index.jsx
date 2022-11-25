@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import { createDataEvent } from "../../stores/actions/event";
 import { useEffect, useState } from "react";
 import axios from "../../utils/axios";
+// import moment from "moment/moment";
 
 function CreateEvent() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function CreateEvent() {
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({});
   const [image, setImage] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
+  console.log(isUpdate);
   console.log(image);
 
   // const [showToast, setShowToast] = useState(false);
@@ -49,22 +52,6 @@ function CreateEvent() {
       console.log(error);
     }
   };
-  const setUpdate = () => {
-    setShow(true);
-  };
-
-  const resetForm = () => {
-    setForm({
-      name: "",
-      category: "",
-      location: "",
-      detail: "",
-      dateTimeShow: "",
-      price: "",
-      image: "",
-    });
-    setImage("");
-  };
 
   const handleChangeForm = (e) => {
     const { name, value, files } = e.target;
@@ -91,6 +78,21 @@ function CreateEvent() {
       }, 3000);
     });
   };
+  const resetForm = () => {
+    setForm({
+      name: "",
+      category: "",
+      location: "",
+      detail: "",
+      dateTimeShow: "",
+      price: "",
+      image: "",
+    });
+    setImage("");
+  };
+
+  // This for update
+
   return (
     <div>
       <Header />
@@ -113,7 +115,7 @@ function CreateEvent() {
               {data.length > 0 ? (
                 data.map((item) => (
                   <div key={item.id}>
-                    <ListEvent data={item} setUpdate={setUpdate} />
+                    <ListEvent data={item} setUpdate={setIsUpdate} />
                   </div>
                 ))
               ) : (
@@ -133,6 +135,7 @@ function CreateEvent() {
           <div>
             <div className="row">
               <div className="col-md-6">
+                {/* <p>{JSON.stringify(form)}</p> */}
                 <div>
                   <form>
                     <label className="modal__name me-3">Name</label>
@@ -142,7 +145,7 @@ function CreateEvent() {
                       className="modal__input w-70"
                       name="name"
                       onChange={handleChangeForm}
-                      placeholder="Input Name Event"
+                      placeholder="Input Name"
                     />
                   </form>
                 </div>
@@ -223,11 +226,19 @@ function CreateEvent() {
               onChange={handleChangeForm}
             />
             {image && <img src={image} alt="view image" />}
+            {/* <button type="submit" className="w-100 my-5 btn btn-primary">
+              {event.isLoading ? (
+                <div className="spinner-border text-white" role="status">
+                  <span className="sr-only"></span>
+                </div>
+              ) : (
+                <div>{isUpdate ? "Update" : "Save"}</div>
+              )}
+            </button> */}
 
             <button className="btn btn-primary" onClick={createEventHandler}>
-              Save
+              Create
             </button>
-            <button>Update</button>
           </div>
         </Modal.Body>
       </Modal>
