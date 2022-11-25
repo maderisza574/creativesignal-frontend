@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 // import moment from "moment/moment";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataEvent, updateDataEvent } from "../../stores/actions/event";
+import {
+  getDataEvent,
+  updateDataEvent,
+  deleteDataEvent,
+} from "../../stores/actions/event";
 
 export default function ListEvent(props) {
   const dispatch = useDispatch();
@@ -16,6 +20,9 @@ export default function ListEvent(props) {
   const handleShow = () => setShow(true);
   const [image, setImage] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
+  // const [eventActiveId, setEventActiveId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
   console.log(isUpdate);
   const eventid = props.data.eventid;
   // const [eventid, setEventId] = useState("");
@@ -75,7 +82,15 @@ export default function ListEvent(props) {
       }, 3000);
     });
   };
-
+  const handleDeleteEvent = async () => {
+    try {
+      setIsLoading(true);
+      await dispatch(deleteDataEvent(eventid));
+      // await dispatch(getDataEvent(eventid));
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
   // const showDataImage = `https://res.cloudinary.com/maderisza/image/upload/v1663492332/${props.data.image}`;
   return (
     <div className="row">
@@ -108,7 +123,9 @@ export default function ListEvent(props) {
           >
             Update
           </button>
-          <button className="btn btn-danger">Delete</button>
+          <button className="btn btn-danger" onClick={handleDeleteEvent}>
+            Delete
+          </button>
         </>
         {/* ) : (
           ""
