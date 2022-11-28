@@ -1,12 +1,8 @@
 import axios from "../../utils/axios";
 
-export const getDataUser = (id) => {
+export const getDataUser = (userid) => {
   return {
-    type: "GET_USER_BY_ID_DUMMY",
-    payload: axios.get(`api/user/${id}`),
+    type: "GET_USER_BY_ID",
+    payload: axios.get(`api/user/${userid}`),
   };
-  //   return {
-  //     type: "GET_USER_BY_ID",
-  //     payload: axios.get(`user/${id}`),
-  //   };
 };

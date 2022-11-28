@@ -4,6 +4,7 @@ import Iconcard from "../../assets/img/cardicon.png";
 import Iconbank from "../../assets/img/bankicon.png";
 import Iconretail from "../../assets/img/retailicon.png";
 import Iconmoney from "../../assets/img/moneyicon.png";
+
 function Payment() {
   return (
     <div>

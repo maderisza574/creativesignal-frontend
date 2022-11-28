@@ -1,6 +1,18 @@
 import Johnicon from "../../assets/img/john.png";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getDataUser } from "../../stores/actions/user";
 function ProfileLeft() {
+  // const userId = localStorage.getItem("idUser");
+  const userData = useSelector((state) => state.user);
+  console.log(userData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const userId = localStorage.getItem("idUser");
+    dispatch(getDataUser(userId));
+  }, []);
   const navigate = useNavigate();
 
   const ChangePass = () => {
@@ -32,7 +44,7 @@ function ProfileLeft() {
           <div className="left card bg-light">
             <div className="d-flex gap-3 bg-light mb-3">
               <img src={Johnicon} alt="" />
-              John Thomson
+              {/* John Thomson{userData.name} */}
               <br />
               Enterprenuer.ID
             </div>

@@ -4,10 +4,10 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_USER_BY_ID_DUMMY": {
+    case "GET_USER_BY_ID": {
       return {
         ...state,
-        data: action.payload.data[0],
+        data: action.payload.data,
       };
     }
     case "GET_USER_BY_ID_PENDING": {
@@ -19,7 +19,7 @@ const user = (state = initialState, action) => {
     case "GET_USER_BY_ID_FULFILLED": {
       return {
         ...state,
-        data: action.payload.data.data[0],
+        data: action.payload.data,
       };
     }
     case "GET_USER_BY_ID_REJECTED": {
