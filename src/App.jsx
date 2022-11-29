@@ -13,12 +13,13 @@ import Payment from "./pages/payment";
 import Profile from "./pages/Profile";
 import ProfileLeft from "./components/ProfileLeft";
 import ProfileDetail from "./components/ProfileDetail";
-import EditProfile from "./components/EditProfile";
+// import EditProfile from "./components/ProfileEdit";
 import ChangePass from "./components/ChangePass";
 import CreateEvent from "./components/CreateEvent";
 import UpdateProfile from "./pages/UpdateProfile";
 import CreateBooking from "./components/CreateBooking";
 import WishlistPage from "./components/WishlistPage";
+import Profileedit from "./components/ProfileEdit";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/profileleft" element={<ProfileLeft />} />
           <Route path="/profiledetail" element={<ProfileDetail />} />
-          <Route path="/profileedit" element={<EditProfile />} />
+          <Route path="/profileedit" element={<Profileedit />} />
           <Route path="/changepass" element={<ChangePass />} />
           <Route path="/createevent" element={<CreateEvent />} />
           <Route path="/updateprofile" element={<UpdateProfile />} />

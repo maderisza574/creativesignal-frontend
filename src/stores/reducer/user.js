@@ -1,5 +1,8 @@
 const initialState = {
   data: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
 };
 
 const user = (state = initialState, action) => {
@@ -28,6 +31,25 @@ const user = (state = initialState, action) => {
         data: [],
       };
     }
+    case "UPDATE_USER_BY_ID_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "UPDATE_USER_BY_ID_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
+      };
+    case "UPDATE_USER_BY_ID_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.payload.response.data.message,
+      };
     default: {
       return state;
     }

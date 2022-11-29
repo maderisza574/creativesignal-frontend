@@ -1,35 +1,29 @@
 import Header from "../Header";
-// import Johnicon from "../../assets/img/john.png";
 import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
-// import { getDataUser } from "../../stores/actions/user";
-// import { useSelector, useDispatch } from "react-redux";
-import axios from "../../utils/axios";
-import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-function Profiledetail() {
-  const userid = localStorage.getItem("idUser");
-  const [data, setData] = useState([]);
-  console.log(data[0]?.username);
-  // const user = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getDataUser(userid));
-  // }, [userid]);
-  // const [user, setUser] = useState(false);
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { updateDataUser, getDataUser } from "../../stores/actions/user";
 
-  const getUserData = async () => {
+function Profileedit() {
+  const userid = localStorage.getItem("idUser");
+  console.log(userid);
+  const dispatch = useDispatch;
+  // THIS REDUX
+  const data = useSelector((state) => state.user.data[0]);
+  console.log(data);
+
+  const updateHandler = async () => {
     try {
-      const result = await axios.get(`api/user/${userid}`);
-      setData(result.data.data);
-      // setDefaultImage(response.data.data[0].image);
+      await dispatch(updateDataUser(userid, form));
+      await dispatch(getDataUser(userid));
+      // alert(result.data.message);
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getUserData();
-  }, []);
+  // END REDUX
+
   const [form, setForm] = useState({
     name: "",
     username: "",
@@ -39,21 +33,12 @@ function Profiledetail() {
     dateofBirth: "",
     email: "",
   });
-  console.log(setForm);
-  console.log(data[0]);
+  console.log(form);
+
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = async () => {
-    try {
-      const result = await axios.patch(`api/user/${userid}`, form);
-      console.log(form);
-      // setUser(!user);
-      alert(result.data.message);
-    } catch (error) {
-      alert(error.response.data.message);
-    }
-  };
+
   return (
     <div>
       <Header />
@@ -77,7 +62,7 @@ function Profiledetail() {
                       name="name"
                       onChange={handleChangeForm}
                       className="form-control"
-                      placeholder={data[0]?.name}
+                      placeholder={data?.name}
                       aria-label="old Password"
                     />
                   </div>
@@ -86,7 +71,7 @@ function Profiledetail() {
                   <div className="d-flex justify-content-center  ">
                     <img
                       src={`https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
-                        data[0]?.image.split(".")[0]
+                        data?.image.split(".")[0]
                       }`}
                       alt=""
                       style={{ width: 50, height: 50 }}
@@ -108,7 +93,7 @@ function Profiledetail() {
                       name="username"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.username}
+                      placeholder={data?.username}
                       aria-label="old Password"
                     />
                   </div>
@@ -133,7 +118,7 @@ function Profiledetail() {
                       name="gender"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.gender}
+                      placeholder={data?.gender}
                       aria-label="old Password"
                     />
                   </div>
@@ -157,7 +142,7 @@ function Profiledetail() {
                       name="profession"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.profession}
+                      placeholder={data?.profession}
                       aria-label="old Password"
                     />
                   </div>
@@ -176,7 +161,7 @@ function Profiledetail() {
                       name="nationality"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.nationality}
+                      placeholder={data?.nationality}
                       aria-label="old Password"
                     />
                   </div>
@@ -195,7 +180,7 @@ function Profiledetail() {
                       name="dateofBirth"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.dateofBirth}
+                      placeholder={data?.dateofBirth}
                       aria-label="old Password"
                     />
                   </div>
@@ -214,7 +199,7 @@ function Profiledetail() {
                       name="email"
                       className="form-control"
                       onChange={handleChangeForm}
-                      placeholder={data[0]?.email}
+                      placeholder={data?.email}
                       aria-label="old Password"
                     />
                   </div>
@@ -228,7 +213,7 @@ function Profiledetail() {
                   <div
                     className="btn btn-primary"
                     type="button"
-                    onClick={handleSubmit}
+                    onClick={updateHandler}
                   >
                     Submit
                   </div>
@@ -249,4 +234,4 @@ function Profiledetail() {
   );
 }
 
-export default Profiledetail;
+export default Profileedit;

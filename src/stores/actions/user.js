@@ -6,3 +6,9 @@ export const getDataUser = (userid) => {
     payload: axios.get(`api/user/${userid}`),
   };
 };
+export const updateDataUser = (userid, form) => {
+  return {
+    type: "UPDATE_USER_BY_ID",
+    payload: axios.patch(`api/user/${userid}`, form),
+  };
+};
