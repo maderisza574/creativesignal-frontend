@@ -19,7 +19,7 @@ const user = (state = initialState, action) => {
     case "GET_USER_BY_ID_FULFILLED": {
       return {
         ...state,
-        data: action.payload.data,
+        data: action.payload.data.data,
       };
     }
     case "GET_USER_BY_ID_REJECTED": {
