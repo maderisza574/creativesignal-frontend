@@ -162,14 +162,16 @@ function Profileedit() {
                     />
                     {lengthImage > 0 ? (
                       <div className="text-center mb-5">
-                        <button className="button" onClick={handleUpdateImage}>
-                          Save
+                        <button
+                          className="btn btn-primary"
+                          onClick={handleUpdateImage}
+                        >
+                          Choose Photo
                         </button>
                       </div>
                     ) : (
                       ""
                     )}
-                    <button className="btn btn-primary">Choose Photo</button>
                   </div>
                 </div>
               </div>
