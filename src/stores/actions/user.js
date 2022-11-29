@@ -12,3 +12,7 @@ export const updateDataUser = (userid, form) => {
     payload: axios.patch(`api/user/${userid}`, form),
   };
 };
+export const updateImageUser = (userid, data) => ({
+  type: "UPDATE_IMAGE_USER_BY_ID",
+  payload: axios.patch(`/api/user/updateImage/${userid}`, data),
+});

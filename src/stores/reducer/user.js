@@ -50,6 +50,25 @@ const user = (state = initialState, action) => {
         isError: true,
         errorMessage: action.payload.response.data.message,
       };
+    case "UPDATE_IMAGE_USER_BY_ID_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "UPDATE_IMAGE_USER_BY_ID_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        errorMessage: "",
+      };
+    case "UPDATE_IMAGE_USER_BY_ID_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.payload.data.message,
+      };
     default: {
       return state;
     }

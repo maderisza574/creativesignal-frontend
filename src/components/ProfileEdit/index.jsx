@@ -3,10 +3,17 @@ import ProfileLeft from "../ProfileLeft";
 import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { updateDataUser, getDataUser } from "../../stores/actions/user";
+import {
+  updateDataUser,
+  getDataUser,
+  updateImageUser,
+} from "../../stores/actions/user";
 
 function Profileedit() {
   const userid = localStorage.getItem("idUser");
+  const [newImage, setNewImage] = useState({});
+  const [imagePreview, setImagePreview] = useState("");
+  const lengthImage = Object.keys(newImage).length;
   console.log(userid);
   const dispatch = useDispatch;
   // THIS REDUX
@@ -22,7 +29,35 @@ function Profileedit() {
       console.log(error);
     }
   };
+  // const handleInputImage = (e) => {
+  //   const { name, files } = e.target;
+  // };
   // END REDUX
+  // THIS FOR IMAGE
+  const handleInputImage = (e) => {
+    const { name, files } = e.target;
+    setNewImage({ [name]: files[0] });
+    setImagePreview(URL.createObjectURL(files[0]));
+  };
+  // const handleUpdateImage = async () => {
+  //   try {
+  //     const imageData = new FormData();
+  //     imageData.append("image", newImage.image);
+  //     await dispatch(updateImageUser(userid, imageData));
+  //     await dispatch(getDataUser(userid));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const handleUpdateImage = () => {
+    const imageData = new FormData();
+    imageData.append("image", newImage.image);
+    dispatch(updateImageUser(userid, imageData)).then(() => {
+      dispatch(getDataUser(userid));
+    });
+  };
+
+  // END FOR IMAGE
 
   const [form, setForm] = useState({
     name: "",
@@ -68,7 +103,7 @@ function Profileedit() {
                   </div>
                 </div>
                 <div className="col bg-white">
-                  <div className="d-flex justify-content-center  ">
+                  {/* <div className="d-flex justify-content-center  ">
                     <img
                       src={`https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
                         data?.image.split(".")[0]
@@ -77,7 +112,25 @@ function Profileedit() {
                       style={{ width: 50, height: 50 }}
                       className="rounded-circle border border-dark"
                     />
+                  </div> */}
+                  {/* this new preview image */}
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={
+                        lengthImage > 0
+                          ? imagePreview
+                          : data?.image.split(".")[0]
+                          ? `https://res.cloudinary.com/maderisza/image/upload/v1668023295/${
+                              data?.image.split(".")[0]
+                            }`
+                          : "https://res.cloudinary.com/dra4ha50q/image/upload/v1665756702/Wainscot-Event-Organizing/User/default-profile_tw4rl0.png"
+                      }
+                      alt=""
+                      style={{ width: 50, height: 50 }}
+                      className="rounded-circle border border-dark"
+                    />
                   </div>
+                  {/* end new previe image */}
                 </div>
               </div>
               {/* end row 1 */}
@@ -100,7 +153,22 @@ function Profileedit() {
                 </div>
                 <div className="col bg-white">
                   <div className="buttonsign d-grid mt-3">
-                    <input type="file" className="btn btn-primary" />
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      className="btn btn-primary"
+                      onChange={handleInputImage}
+                    />
+                    {lengthImage > 0 ? (
+                      <div className="text-center mb-5">
+                        <button className="button" onClick={handleUpdateImage}>
+                          Save
+                        </button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     <button className="btn btn-primary">Choose Photo</button>
                   </div>
                 </div>
