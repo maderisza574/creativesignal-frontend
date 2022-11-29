@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 import axios from "../../utils/axios";
 import { useEffect, useState } from "react";
+// import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Header() {
   const userid = localStorage.getItem("idUser");
@@ -11,9 +12,16 @@ export default function Header() {
   const navigate = useNavigate();
   const isLogin = localStorage.getItem("token");
   const name = "";
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/signin");
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("api/auth/logout");
+      localStorage.clear();
+      navigate("/signin");
+    } catch (error) {
+      console.log(error);
+    }
+    // localStorage.removeItem("token");
   };
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
