@@ -54,11 +54,9 @@ function Order() {
 
   const getDataEvent = async () => {
     try {
-      const result = await axios.get(
-        `api/event/0bdf7f38-485c-42ca-8f99-7cc11789dbf6`
-      );
+      const result = await axios.get(`api/event/${state.eventId}`);
       console.log(result);
-      setDataEvent(result.data);
+      setDataEvent(result.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -97,13 +95,14 @@ function Order() {
       }
     }
   };
-
+  console.log(dataEvent[0]?.price);
   const handleOrderSeat = () => {
     // console.log(dataOrder);
     navigate("/payment", {
       state: {
         dataOrder,
         eventId: state.eventId,
+        dataEvent: dataEvent,
         // eventId: state.eventid,
       },
     });

@@ -6,21 +6,27 @@ import Iconcard from "../../assets/img/cardicon.png";
 import Iconbank from "../../assets/img/bankicon.png";
 import Iconretail from "../../assets/img/retailicon.png";
 import Iconmoney from "../../assets/img/moneyicon.png";
+// import { getDataEvent } from "../../stores/actions/event";
+// import { useSelector } from "react-redux";
 
 import { useLocation } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 function Payment() {
+  // const event = useSelector((state) => state.event);
+  // console.log(event);
   const { state } = useLocation();
+  const userId = localStorage.getItem("idUser");
   // const [data, setData] = useState({});
   const databooking = {
-    userid: "36329683-e8ae-4e9e-9d58-1f2616036552",
+    userid: userId,
     eventid: state.eventId,
-    totalTicket: 1,
-    totalPayment: 200000,
+    totalTicket: state.dataOrder[0].qty,
+    totalPayment: state.dataOrder[0].price,
     paymentmethod: "midtrans",
     statuspayment: true,
   };
+  console.log(databooking);
   // HANDLE CREATE BOOKING 1 REQUEST
   const handlePayment = async () => {
     try {
@@ -141,10 +147,28 @@ function Payment() {
               <h5 className="mb-5 mt-3 mx-2">Ticket Detail</h5>
 
               <div className="row">
-                <div className="row">Event</div>
-                <div className="row">Ticket Section</div>
-                <div className="row">Quantity</div>
-                <div className="row">Total Payment</div>
+                <div className="row">
+                  Event
+                  <div className="col">{state.dataEvent[0]?.name}</div>
+                </div>
+                <div className="row">
+                  Ticket Section
+                  <div className="col info__payment">
+                    {state.dataOrder[0]?.seat}
+                  </div>
+                </div>
+                <div className="row">
+                  Quantity
+                  <div className="col info__payment">
+                    {state.dataOrder[0]?.qty}
+                  </div>
+                </div>
+                <div className="row">
+                  Total Payment
+                  <div className="col info__payment">
+                    {state.dataOrder[0]?.price}
+                  </div>
+                </div>
                 <button
                   className="btn btn-primary mt-5"
                   onClick={handlePayment}
