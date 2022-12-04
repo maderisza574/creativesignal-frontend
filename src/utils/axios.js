@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const axiosApiIntances = axios.create({
-  // baseURL: "https://event-organizing-backend.vercel.app/",
+  baseURL: "https://creative-signal-backend.vercel.app/",
   // baseURL: "https://next-event-organizer-backend.vercel.app/",
-  baseURL: "http://localhost:3001/",
+  // baseURL: "http://localhost:3001/",
 });
 // Add a request interceptor
 axiosApiIntances.interceptors.request.use(
